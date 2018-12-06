@@ -246,15 +246,27 @@
 	</dependencies>
 
 	<build>
-		<finalName>${project.artifactId}</finalName>
 		<plugins>
 			<plugin>
-				<groupId>org.springframework.boot</groupId>
-				<artifactId>spring-boot-maven-plugin</artifactId>
-				<configuration>
-					<fork>true</fork> <!-- 如果没有该配置，devtools不会生效 -->
-				</configuration>
-			</plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-jar-plugin</artifactId>
+            <configuration>
+                
+                   <!--打包的时候忽略classes 路径下的配置文件 -->
+                   <excludes>
+                       <exclude>*.properties</exclude>
+                       <exclude>*.ccf</exclude>
+                       <exclude>*.xml</exclude>
+                       <exclude>*.txt</exclude>
+                       <exclude>*.yml</exclude>
+                       <exclude>i18n/**</exclude>
+                       <exclude>ehcache/**</exclude>
+                       <exclude>mybatis/**</exclude>
+                       <exclude>static/**</exclude>
+                       <exclude>templates/**</exclude>
+                   </excludes>
+            </configuration>
+        </plugin>
 		</plugins>
 	</build>
 
