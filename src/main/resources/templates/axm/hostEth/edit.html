@@ -1,0 +1,59 @@
+<!DOCTYPE HTML>
+<html  lang="zh" xmlns:th="http://www.thymeleaf.org">
+<meta charset="utf-8">
+<head th:include="include :: header"></head>
+<body class="white-bg">
+    <div class="wrapper wrapper-content animated fadeInRight ibox-content">
+        <form class="form-horizontal m" id="form-hostEth-edit" th:object="${hostEth}">
+            <input id="ethId" name="ethId" th:field="*{ethId}"  type="hidden">
+			<div class="form-group">	
+				<label class="col-sm-3 control-label">网卡名称：</label>
+				<div class="col-sm-8">
+					<input id="ethName" name="ethName" th:field="*{ethName}" class="form-control" type="text">
+				</div>
+			</div>
+			<div class="form-group">	
+				<label class="col-sm-3 control-label">网卡MAC：</label>
+				<div class="col-sm-8">
+					<input id="ethMac" name="ethMac" th:field="*{ethMac}" class="form-control" type="text">
+				</div>
+			</div>
+			<div class="form-group">	
+				<label class="col-sm-3 control-label">网卡IP：</label>
+				<div class="col-sm-8">
+					<input id="ethIp" name="ethIp" th:field="*{ethIp}" class="form-control" type="text">
+				</div>
+			</div>
+			<div class="form-group">	
+				<label class="col-sm-3 control-label">网卡掩码：</label>
+				<div class="col-sm-8">
+					<input id="ethMask" name="ethMask" th:field="*{ethMask}" class="form-control" type="text">
+				</div>
+			</div>
+			<div class="form-group">	
+				<label class="col-sm-3 control-label">网关：</label>
+				<div class="col-sm-8">
+					<input id="ethGateway" name="ethGateway" th:field="*{ethGateway}" class="form-control" type="text">
+				</div>
+			</div>
+		</form>
+    </div>
+    <div th:include="include::footer"></div>
+    <script type="text/javascript">
+		var prefix = ctx + "axm/hostEth"
+		$("#form-hostEth-edit").validate({
+			rules:{
+				xxxx:{
+					required:true,
+				},
+			}
+		});
+		
+		function submitHandler() {
+	        if ($.validate.form()) {
+	            $.operate.save(prefix + "/edit", $('#form-hostEth-edit').serialize());
+	        }
+	    }
+	</script>
+</body>
+</html>

@@ -1,0 +1,119 @@
+<!DOCTYPE HTML>
+<html  lang="zh" xmlns:th="http://www.thymeleaf.org">
+<meta charset="utf-8">
+<head th:include="include :: header"></head>
+<body class="white-bg">
+    <div class="wrapper wrapper-content animated fadeInRight ibox-content">
+        <form class="form-horizontal m" id="form-host-edit" th:object="${host}">
+            <input id="hostId" name="hostId" th:field="*{hostId}"  type="hidden">
+			<div class="form-group">	
+				<label class="col-sm-3 control-label">agtID：</label>
+				<div class="col-sm-8">
+					<input id="agtEid" name="agtEid" th:field="*{agtEid}" class="form-control" type="text">
+				</div>
+			</div>
+			<div class="form-group">	
+				<label class="col-sm-3 control-label">主机名：</label>
+				<div class="col-sm-8">
+					<input id="hostName" name="hostName" th:field="*{hostName}" class="form-control" type="text">
+				</div>
+			</div>
+			<div class="form-group">	
+				<label class="col-sm-3 control-label">主机IP：</label>
+				<div class="col-sm-8">
+					<input id="hostIp" name="hostIp" th:field="*{hostIp}" class="form-control" type="text">
+				</div>
+			</div>
+			<div class="form-group">	
+				<label class="col-sm-3 control-label">系统类型：</label>
+				<div class="col-sm-8">
+					<input id="sysType" name="sysType" th:field="*{sysType}" class="form-control" type="text">
+				</div>
+			</div>
+			<div class="form-group">	
+				<label class="col-sm-3 control-label">系统版本：</label>
+				<div class="col-sm-8">
+					<input id="sysVer" name="sysVer" th:field="*{sysVer}" class="form-control" type="text">
+				</div>
+			</div>
+			<div class="form-group">	
+				<label class="col-sm-3 control-label">内核版本：</label>
+				<div class="col-sm-8">
+					<input id="coreVer" name="coreVer" th:field="*{coreVer}" class="form-control" type="text">
+				</div>
+			</div>
+			<div class="form-group">	
+				<label class="col-sm-3 control-label">硬盘序列号：</label>
+				<div class="col-sm-8">
+					<input id="discNum" name="discNum" th:field="*{discNum}" class="form-control" type="text">
+				</div>
+			</div>
+			<div class="form-group">	
+				<label class="col-sm-3 control-label">硬盘型号：</label>
+				<div class="col-sm-8">
+					<input id="discType" name="discType" th:field="*{discType}" class="form-control" type="text">
+				</div>
+			</div>
+			<div class="form-group">	
+				<label class="col-sm-3 control-label">硬盘大小(GB)：</label>
+				<div class="col-sm-8">
+					<input id="discSize" name="discSize" th:field="*{discSize}" class="form-control" type="text">
+				</div>
+			</div>
+			<div class="form-group">	
+				<label class="col-sm-3 control-label">CPU颗数：</label>
+				<div class="col-sm-8">
+					<input id="cpuCount" name="cpuCount" th:field="*{cpuCount}" class="form-control" type="text">
+				</div>
+			</div>
+			<div class="form-group">	
+				<label class="col-sm-3 control-label">单CUP核数：</label>
+				<div class="col-sm-8">
+					<input id="cupCores" name="cupCores" th:field="*{cupCores}" class="form-control" type="text">
+				</div>
+			</div>
+			<div class="form-group">	
+				<label class="col-sm-3 control-label">CPU型号：</label>
+				<div class="col-sm-8">
+					<input id="cpuModel" name="cpuModel" th:field="*{cpuModel}" class="form-control" type="text">
+				</div>
+			</div>
+			<div class="form-group">	
+				<label class="col-sm-3 control-label">内存型号：</label>
+				<div class="col-sm-8">
+					<input id="memType" name="memType" th:field="*{memType}" class="form-control" type="text">
+				</div>
+			</div>
+			<div class="form-group">	
+				<label class="col-sm-3 control-label">内存条数：</label>
+				<div class="col-sm-8">
+					<input id="memCount" name="memCount" th:field="*{memCount}" class="form-control" type="text">
+				</div>
+			</div>
+			<div class="form-group">	
+				<label class="col-sm-3 control-label">内存大小(MB)：</label>
+				<div class="col-sm-8">
+					<input id="memSize" name="memSize" th:field="*{memSize}" class="form-control" type="text">
+				</div>
+			</div>
+		</form>
+    </div>
+    <div th:include="include::footer"></div>
+    <script type="text/javascript">
+		var prefix = ctx + "axm/host"
+		$("#form-host-edit").validate({
+			rules:{
+				xxxx:{
+					required:true,
+				},
+			}
+		});
+		
+		function submitHandler() {
+	        if ($.validate.form()) {
+	            $.operate.save(prefix + "/edit", $('#form-host-edit').serialize());
+	        }
+	    }
+	</script>
+</body>
+</html>

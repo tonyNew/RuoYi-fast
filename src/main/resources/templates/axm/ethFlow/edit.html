@@ -1,0 +1,65 @@
+<!DOCTYPE HTML>
+<html  lang="zh" xmlns:th="http://www.thymeleaf.org">
+<meta charset="utf-8">
+<head th:include="include :: header"></head>
+<body class="white-bg">
+    <div class="wrapper wrapper-content animated fadeInRight ibox-content">
+        <form class="form-horizontal m" id="form-ethFlow-edit" th:object="${ethFlow}">
+            <input id="flowId" name="flowId" th:field="*{flowId}"  type="hidden">
+			<div class="form-group">	
+				<label class="col-sm-3 control-label">主机名：</label>
+				<div class="col-sm-8">
+					<input id="hostName" name="hostName" th:field="*{hostName}" class="form-control" type="text">
+				</div>
+			</div>
+			<div class="form-group">	
+				<label class="col-sm-3 control-label">网卡ip：</label>
+				<div class="col-sm-8">
+					<input id="ethIp" name="ethIp" th:field="*{ethIp}" class="form-control" type="text">
+				</div>
+			</div>
+			<div class="form-group">	
+				<label class="col-sm-3 control-label">网卡名：</label>
+				<div class="col-sm-8">
+					<input id="ethName" name="ethName" th:field="*{ethName}" class="form-control" type="text">
+				</div>
+			</div>
+			<div class="form-group">	
+				<label class="col-sm-3 control-label">下行流量：</label>
+				<div class="col-sm-8">
+					<input id="ethTx" name="ethTx" th:field="*{ethTx}" class="form-control" type="text">
+				</div>
+			</div>
+			<div class="form-group">	
+				<label class="col-sm-3 control-label">上行流量：</label>
+				<div class="col-sm-8">
+					<input id="ethRx" name="ethRx" th:field="*{ethRx}" class="form-control" type="text">
+				</div>
+			</div>
+			<div class="form-group">	
+				<label class="col-sm-3 control-label">上报时间：</label>
+				<div class="col-sm-8">
+					<input id="reportTime" name="reportTime" th:field="*{reportTime}" class="form-control" type="text">
+				</div>
+			</div>
+		</form>
+    </div>
+    <div th:include="include::footer"></div>
+    <script type="text/javascript">
+		var prefix = ctx + "axm/ethFlow"
+		$("#form-ethFlow-edit").validate({
+			rules:{
+				xxxx:{
+					required:true,
+				},
+			}
+		});
+		
+		function submitHandler() {
+	        if ($.validate.form()) {
+	            $.operate.save(prefix + "/edit", $('#form-ethFlow-edit').serialize());
+	        }
+	    }
+	</script>
+</body>
+</html>

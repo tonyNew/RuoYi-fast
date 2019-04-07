@@ -1,0 +1,153 @@
+<!DOCTYPE HTML>
+<html lang="zh" xmlns:th="http://www.thymeleaf.org" xmlns:shiro="http://www.pollix.at/thymeleaf/shiro">
+<meta charset="utf-8">
+<head th:include="include :: header"></head>
+<body class="gray-bg">
+    
+     <div class="container-div">
+		<div class="row">
+			<div class="col-sm-12 search-collapse">
+				<form id="formId">
+					<div class="select-list">
+						<ul>
+							<li>
+								部门：<input type="text" name="deptId"/>
+							</li>
+
+							<li>
+								姓名：<input type="text" name="name"/>
+							</li>
+
+							<li class="select-time">
+								<label>入学时间： </label>
+								<input type="text" class="time-input" id="startIntime" placeholder="开始" name="params[beginIntime]"/>
+								<span>-</span>
+								<input type="text" class="time-input" id="endIntime" placeholder="结束" name="params[endIntime]"/>
+							</li>
+							<li class="select-time">
+								<label>出生日期： </label>
+								<input type="text" class="time-input" id="startBirthday" placeholder="开始" name="params[beginBirthday]"/>
+								<span>-</span>
+								<input type="text" class="time-input" id="endBirthday" placeholder="结束" name="params[endBirthday]"/>
+							</li>
+							<li>
+								年龄：<input type="text" name="age"/>
+							</li>
+
+							<li>
+								性别：<select name="sex" th:with="type=${@dict.getType('sys_user_sex')}">
+									<option value="">所有</option>
+									<option th:each="dict : ${type}" th:text="${dict.dictLabel}" th:value="${dict.dictValue}"></option>
+								</select>
+							</li>
+							<li>
+								住址：<input type="text" name="addr"/>
+							</li>
+
+							<li>
+								<a class="btn btn-primary btn-rounded btn-sm" onclick="$.table.search()"><i class="fa fa-search"></i>&nbsp;搜索</a>
+								<a class="btn btn-warning btn-rounded btn-sm" onclick="$.form.reset()"><i class="fa fa-refresh"></i>&nbsp;重置</a>
+							</li>
+						</ul>
+					</div>
+				</form>
+			</div>
+			
+	        <div class="btn-group-sm hidden-xs" id="toolbar" role="group">
+				<a class="btn btn-success" onclick="$.operate.add()" shiro:hasPermission="axm:student:add">
+					<i class="fa fa-plus"></i> 添加
+				</a>
+				<a class="btn btn-primary btn-edit disabled" onclick="$.operate.edit()" shiro:hasPermission="axm:student:edit">
+					<i class="fa fa-edit"></i> 修改
+				</a>
+				<a class="btn btn-danger btn-del btn-del disabled" onclick="$.operate.removeAll()" shiro:hasPermission="axm:student:remove">
+					<i class="fa fa-remove"></i> 删除
+				</a>
+				<a class="btn btn-warning" onclick="$.table.exportExcel()" shiro:hasPermission="axm:student:export">
+						<i class="fa fa-download"></i> 导出
+				 </a>
+			</div>
+			<div class="col-sm-12 select-table table-striped">
+				<table id="bootstrap-table" data-mobile-responsive="true"></table>
+			</div>
+		</div>
+	</div>
+    <div th:include="include :: footer"></div>
+    <script th:inline="javascript">
+        var editFlag = [[${@permission.hasPermi('axm:student:edit')}]];
+        var removeFlag = [[${@permission.hasPermi('axm:student:remove')}]];
+        var prefix = ctx + "axm/student";
+        var datas = [[${@dict.getType('sys_user_sex')}]];
+
+        $(function() {
+            var options = {
+                url: prefix + "/list",
+                createUrl: prefix + "/add",
+                updateUrl: prefix + "/edit/{id}",
+                removeUrl: prefix + "/remove",
+				exportUrl: prefix + "/export",
+                modalName: "学生(DEMO)",
+				search: false,
+		        showExport: true,
+                columns: [{
+		            checkbox: true
+		        },
+				{
+					field : 'studentId', 
+					title : '学生ID',
+					visible: false
+				},
+				{
+					field : 'deptId', 
+					title : '部门',
+					sortable: true
+				},
+				{
+					field : 'name', 
+					title : '姓名',
+					sortable: true
+				},
+				{
+					field : 'intime', 
+					title : '入学时间',
+					sortable: true
+				},
+				{
+					field : 'birthday', 
+					title : '出生日期',
+					sortable: true
+				},
+				{
+					field : 'age', 
+					title : '年龄',
+					sortable: true
+				},
+				{
+					field : 'sex', 
+					title : '性别',
+					sortable: true,
+					formatter: function(value, row, index) {
+		            	return $.table.selectDictLabel(datas, value);
+		            }
+				},
+				{
+					field : 'addr', 
+					title : '住址',
+					sortable: true
+				},
+		        {
+		            title: '操作',
+		            align: 'center',
+		            formatter: function(value, row, index) {
+		            	var actions = [];
+		            	actions.push('<a class="btn btn-success btn-xs ' + editFlag + '" href="#" onclick="$.operate.edit(\'' + row.studentId + '\')"><i class="fa fa-edit"></i>编辑</a> ');
+                        actions.push('<a class="btn btn-danger btn-xs ' + removeFlag + '" href="#" onclick="$.operate.remove(\'' + row.studentId + '\')"><i class="fa fa-remove"></i>删除</a>');
+						return actions.join('');
+		            }
+		        }]
+            };
+            $.table.init(options);
+        });
+    </script>
+</body>
+</html>
