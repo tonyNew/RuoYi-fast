@@ -13,28 +13,28 @@ public class SubSystem extends BaseEntity {
 	private String url;
 	private String desc;
 	private String img;
-	protected String getName() {
+	public String getName() {
 		return name;
 	}
-	protected void setName(String name) {
+	public void setName(String name) {
 		this.name = name;
 	}
-	protected String getUrl() {
+	public String getUrl() {
 		return url;
 	}
-	protected void setUrl(String url) {
+	public void setUrl(String url) {
 		this.url = url;
 	}
-	protected String getDesc() {
+	public String getDesc() {
 		return desc;
 	}
-	protected void setDesc(String desc) {
+	public void setDesc(String desc) {
 		this.desc = desc;
 	}
-	protected String getImg() {
+	public String getImg() {
 		return img;
 	}
-	protected void setImg(String img) {
+	public void setImg(String img) {
 		this.img = img;
 	}
 	
