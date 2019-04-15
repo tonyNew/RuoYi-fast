@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sinoiov.project.subsystem.subsystem.mapper.SubSystemMapper">
+
+	<resultMap type="SubSystem" id="SubSystemResult">
+		<!-- <collection  property="roles"   javaType="java.util.List"        resultMap="RoleResult" /> -->
+	</resultMap>
+	
+	<select id="detailById" parameterType="long" resultMap="SubSystemResult">
+		select * from as_subsystem where id=#{id}
+	</select>
+	<select id="list" parameterType="SubSystem" resultMap="SubSystemResult">
+		select * from as_subsystem 
+	</select>
+	<insert id="add" parameterType="SubSystem">
+		insert into as_subsystem(
+ 			<if test="name != null and name != ''">`name`,</if>
+ 			<if test="url != null and url != ''">url,</if>
+ 			<if test="desc != null and desc != ''">desc,</if>
+ 			<if test="img != null and img != ''">img,</if>
+ 			<if test="createBy != null and createBy != ''">create_by,</if>
+ 			<if test="remark != null and remark != ''">remark,</if>
+ 			create_time
+ 		)values(
+ 			<if test="name != null and name != ''">#{name},</if>
+ 			<if test="url != null and url != ''">#{url},</if>
+ 			<if test="desc != null and desc != ''">#{desc},</if>
+ 			<if test="img != null and img != ''">#{img},</if>
+ 			<if test="createBy != null and createBy != ''">#{createBy},</if>
+ 			<if test="remark != null and remark != ''">#{remark},</if>
+ 			sysdate()
+ 		)
+	</insert>
+	<update id="update" parameterType="SubSystem" >
+		update as_subsystem
+ 		<set>
+ 			<if test="name != null and name != ''">`name`=#{name},</if>
+ 			<if test="url != null and url != ''">url=#{url},</if>
+ 			<if test="desc != null and desc != ''">desc=#{desc},</if>
+ 			<if test="img != null and img != ''">img = #{img},</if>
+ 			<if test="updateBy != null and updateBy != ''">update_by = #{updateBy},</if>
+ 			<if test="remark != null and remark != ''">remark = #{remark},</if>
+ 			update_time = sysdate()
+ 		</set>
+ 		where id = #{id}
+	</update>
+	
+	<delete id="delById" parameterType="long">
+ 		delete from as_subsystem where id = #{id}
+	</delete>
+	
+	
+</mapper> 

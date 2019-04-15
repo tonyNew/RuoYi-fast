@@ -8,7 +8,7 @@
 	<version>1.0.0</version>
 	<packaging>jar</packaging>
 
-	<name>RuoYi</name>
+	<name>sinoiov-admin</name>
 	<url>http://www.sinoiov.vip</url>
 	<description>中交兴路IT中心综合管控平台</description>
 
@@ -259,6 +259,11 @@
 			<groupId>org.apache.poi</groupId>
 			<artifactId>poi-ooxml</artifactId>
 			<version>${poi.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>com.sinoiov</groupId>
+			<artifactId>sino-sdk</artifactId>
+			<version>0.0.1-SNAPSHOT</version>
 		</dependency>
 
 	</dependencies>
