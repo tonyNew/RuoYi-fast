@@ -8,7 +8,7 @@ import com.sinoiov.common.utils.MessageUtils;
 /**
  * permission 工具类
  * 
- * @author ruoyi
+ * @author tony
  */
 public class PermissionUtils
 {

@@ -23,7 +23,7 @@ import com.sinoiov.project.monitor.job.service.IJobLogService;
 /**
  * 定时任务
  * 
- * @author ruoyi
+ * @author tony
  *
  */
 @DisallowConcurrentExecution

@@ -7,7 +7,7 @@ import com.sinoiov.project.monitor.online.domain.UserOnline;
 /**
  * 在线用户 数据层
  * 
- * @author ruoyi
+ * @author tony
  */
 public interface UserOnlineMapper
 {

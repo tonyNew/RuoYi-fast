@@ -13,7 +13,7 @@ import com.sinoiov.project.system.notice.service.INoticeService;
 /**
  * 公告 服务层实现
  * 
- * @author ruoyi
+ * @author tony
  * @date 2018-06-25
  */
 @Service

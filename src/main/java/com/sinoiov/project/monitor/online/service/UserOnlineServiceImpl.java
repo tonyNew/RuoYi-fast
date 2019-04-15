@@ -15,7 +15,7 @@ import com.sinoiov.project.monitor.online.mapper.UserOnlineMapper;
 /**
  * 在线用户 服务层处理
  * 
- * @author ruoyi
+ * @author tony
  */
 @Service
 public class UserOnlineServiceImpl implements IUserOnlineService

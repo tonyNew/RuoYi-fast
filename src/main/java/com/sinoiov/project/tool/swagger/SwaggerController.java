@@ -10,7 +10,7 @@ import com.sinoiov.framework.web.controller.BaseController;
 /**
  * swagger 接口
  * 
- * @author ruoyi
+ * @author tony
  */
 @Controller
 @RequestMapping("/tool/swagger")

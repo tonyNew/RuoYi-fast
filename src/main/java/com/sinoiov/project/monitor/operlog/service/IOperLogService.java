@@ -7,7 +7,7 @@ import com.sinoiov.project.monitor.operlog.domain.OperLog;
 /**
  * 操作日志 服务层
  * 
- * @author ruoyi
+ * @author tony
  */
 public interface IOperLogService
 {

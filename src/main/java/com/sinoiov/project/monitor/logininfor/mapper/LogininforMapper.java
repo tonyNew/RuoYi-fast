@@ -7,7 +7,7 @@ import com.sinoiov.project.monitor.logininfor.domain.Logininfor;
 /**
  * 系统访问日志情况信息 数据层
  * 
- * @author ruoyi
+ * @author tony
  */
 public interface LogininforMapper
 {

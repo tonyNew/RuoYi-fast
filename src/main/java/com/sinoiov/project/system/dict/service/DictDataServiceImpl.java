@@ -12,7 +12,7 @@ import com.sinoiov.project.system.dict.mapper.DictDataMapper;
 /**
  * 字典 业务层处理
  * 
- * @author ruoyi
+ * @author tony
  */
 @Service
 public class DictDataServiceImpl implements IDictDataService

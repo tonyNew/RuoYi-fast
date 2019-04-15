@@ -8,7 +8,7 @@ import com.sinoiov.project.system.dict.domain.DictType;
 /**
  * 字典表 数据层
  * 
- * @author ruoyi
+ * @author tony
  */
 @Mapper
 public interface DictTypeMapper

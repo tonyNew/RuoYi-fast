@@ -7,7 +7,7 @@ import com.sinoiov.project.tool.gen.domain.TableInfo;
 /**
  * 代码生成 服务层
  * 
- * @author ruoyi
+ * @author tony
  */
 public interface IGenService
 {

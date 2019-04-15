@@ -3,7 +3,7 @@ package com.sinoiov.project.monitor.server.domain;
 /**
  * 系统相关信息
  * 
- * @author ruoyi
+ * @author tony
  */
 public class Sys
 {

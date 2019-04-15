@@ -3,7 +3,7 @@ package com.sinoiov.common.constant;
 /**
  * Shiro通用常量
  * 
- * @author ruoyi
+ * @author tony
  */
 public interface ShiroConstants
 {

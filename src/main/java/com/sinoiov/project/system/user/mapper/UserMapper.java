@@ -7,7 +7,7 @@ import com.sinoiov.project.system.user.domain.User;
 /**
  * 用户表 数据层
  * 
- * @author ruoyi
+ * @author tony
  */
 public interface UserMapper
 {

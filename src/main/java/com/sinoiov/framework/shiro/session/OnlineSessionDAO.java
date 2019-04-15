@@ -16,7 +16,7 @@ import com.sinoiov.project.monitor.online.service.IUserOnlineService;
 /**
  * 针对自定义的ShiroSession的db操作
  * 
- * @author ruoyi
+ * @author tony
  */
 public class OnlineSessionDAO extends EnterpriseCacheSessionDAO
 {

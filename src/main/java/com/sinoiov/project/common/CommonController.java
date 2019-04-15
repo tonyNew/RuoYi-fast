@@ -15,7 +15,7 @@ import com.sinoiov.framework.config.RuoYiConfig;
 /**
  * 通用请求处理
  * 
- * @author ruoyi
+ * @author tony
  */
 @Controller
 public class CommonController

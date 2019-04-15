@@ -23,7 +23,7 @@ import com.sinoiov.project.system.dict.service.IDictDataService;
 /**
  * 数据字典信息
  * 
- * @author ruoyi
+ * @author tony
  */
 @Controller
 @RequestMapping("/system/dict/data")

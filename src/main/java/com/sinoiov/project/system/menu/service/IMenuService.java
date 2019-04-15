@@ -11,7 +11,7 @@ import com.sinoiov.project.system.user.domain.User;
 /**
  * 菜单 业务层
  * 
- * @author ruoyi
+ * @author tony
  */
 public interface IMenuService
 {

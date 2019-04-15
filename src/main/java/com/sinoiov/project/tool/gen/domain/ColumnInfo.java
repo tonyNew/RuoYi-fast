@@ -6,7 +6,7 @@ import com.sinoiov.common.utils.StringUtils;
 /**
  * ry数据库表列信息
  * 
- * @author ruoyi
+ * @author tony
  */
 public class ColumnInfo
 {

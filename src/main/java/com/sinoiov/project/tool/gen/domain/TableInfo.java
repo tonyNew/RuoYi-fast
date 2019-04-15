@@ -8,7 +8,7 @@ import com.sinoiov.framework.web.domain.BaseEntity;
 /**
  * ry 数据库表
  * 
- * @author ruoyi
+ * @author tony
  */
 public class TableInfo extends BaseEntity
 {

@@ -3,7 +3,7 @@ package com.sinoiov.framework.aspectj.lang.enums;
 /**
  * 操作人类别
  * 
- * @author ruoyi
+ * @author tony
  *
  */
 public enum OperatorType

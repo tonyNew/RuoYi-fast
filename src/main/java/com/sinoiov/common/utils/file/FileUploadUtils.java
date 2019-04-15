@@ -12,7 +12,7 @@ import com.sinoiov.framework.config.RuoYiConfig;
 /**
  * 文件上传工具类
  * 
- * @author ruoyi
+ * @author tony
  */
 public class FileUploadUtils
 {

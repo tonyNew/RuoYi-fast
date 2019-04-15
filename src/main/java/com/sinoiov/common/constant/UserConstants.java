@@ -3,7 +3,7 @@ package com.sinoiov.common.constant;
 /**
  * 用户常量信息
  * 
- * @author ruoyi
+ * @author tony
  */
 public class UserConstants
 {

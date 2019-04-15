@@ -8,7 +8,7 @@ import com.sinoiov.framework.web.domain.BaseEntity;
 /**
  * 通知公告表 sys_notice
  * 
- * @author ruoyi
+ * @author tony
  */
 public class Notice extends BaseEntity
 {

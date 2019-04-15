@@ -23,7 +23,7 @@ import com.sinoiov.project.system.post.service.IPostService;
 /**
  * 岗位信息操作处理
  * 
- * @author ruoyi
+ * @author tony
  */
 @Controller
 @RequestMapping("/system/post")

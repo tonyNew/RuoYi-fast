@@ -10,7 +10,7 @@ import com.sinoiov.project.system.dict.service.IDictDataService;
 /**
  * RuoYi首创 html调用 thymeleaf 实现字典读取
  * 
- * @author ruoyi
+ * @author tony
  */
 @Service("dict")
 public class DictService

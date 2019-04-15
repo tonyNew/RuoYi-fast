@@ -8,7 +8,7 @@ import com.sinoiov.project.system.role.domain.Role;
 /**
  * 角色业务层
  * 
- * @author ruoyi
+ * @author tony
  */
 public interface IRoleService
 {

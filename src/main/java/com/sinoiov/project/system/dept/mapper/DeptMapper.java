@@ -8,7 +8,7 @@ import com.sinoiov.project.system.dept.domain.Dept;
 /**
  * 部门管理 数据层
  * 
- * @author ruoyi
+ * @author tony
  */
 public interface DeptMapper
 {

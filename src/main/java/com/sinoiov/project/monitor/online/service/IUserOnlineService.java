@@ -8,7 +8,7 @@ import com.sinoiov.project.monitor.online.domain.UserOnline;
 /**
  * 在线用户 服务层
  * 
- * @author ruoyi
+ * @author tony
  */
 public interface IUserOnlineService
 {

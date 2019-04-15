@@ -8,7 +8,7 @@ import com.sinoiov.framework.web.domain.BaseEntity;
 /**
  * 部门表 sys_dept
  * 
- * @author ruoyi
+ * @author tony
  */
 public class Dept extends BaseEntity
 {

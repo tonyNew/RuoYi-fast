@@ -23,7 +23,7 @@ import com.sinoiov.project.monitor.job.service.IJobService;
 /**
  * 调度任务信息操作处理
  * 
- * @author ruoyi
+ * @author tony
  */
 @Controller
 @RequestMapping("/monitor/job")

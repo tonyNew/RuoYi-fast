@@ -24,7 +24,7 @@ import com.sinoiov.project.tool.gen.service.IGenService;
 /**
  * 代码生成 操作处理
  * 
- * @author ruoyi
+ * @author tony
  */
 @Controller
 @RequestMapping("/tool/gen")

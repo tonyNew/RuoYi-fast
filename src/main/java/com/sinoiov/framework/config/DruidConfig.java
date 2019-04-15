@@ -15,7 +15,7 @@ import com.sinoiov.framework.datasource.DynamicDataSource;
 /**
  * druid 配置多数据源
  * 
- * @author ruoyi
+ * @author tony
  */
 @Configuration
 public class DruidConfig

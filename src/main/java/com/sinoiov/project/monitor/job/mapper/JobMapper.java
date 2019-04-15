@@ -7,7 +7,7 @@ import com.sinoiov.project.monitor.job.domain.Job;
 /**
  * 调度任务信息 数据层
  * 
- * @author ruoyi
+ * @author tony
  */
 public interface JobMapper
 {

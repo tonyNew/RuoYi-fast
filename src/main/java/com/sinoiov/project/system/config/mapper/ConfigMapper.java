@@ -7,7 +7,7 @@ import com.sinoiov.project.system.config.domain.Config;
 /**
  * 参数配置 数据层
  * 
- * @author ruoyi
+ * @author tony
  */
 public interface ConfigMapper
 {

@@ -7,7 +7,7 @@ import com.sinoiov.project.monitor.job.domain.JobLog;
 /**
  * 定时任务调度日志信息信息 服务层
  * 
- * @author ruoyi
+ * @author tony
  */
 public interface IJobLogService
 {

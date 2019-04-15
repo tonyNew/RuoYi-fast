@@ -7,7 +7,7 @@ import com.sinoiov.project.system.notice.domain.Notice;
 /**
  * 公告 数据层
  * 
- * @author ruoyi
+ * @author tony
  */
 public interface NoticeMapper
 {

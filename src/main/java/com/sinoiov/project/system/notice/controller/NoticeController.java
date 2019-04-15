@@ -22,7 +22,7 @@ import com.sinoiov.project.system.notice.service.INoticeService;
 /**
  * 公告 信息操作处理
  * 
- * @author ruoyi
+ * @author tony
  */
 @Controller
 @RequestMapping("/system/notice")

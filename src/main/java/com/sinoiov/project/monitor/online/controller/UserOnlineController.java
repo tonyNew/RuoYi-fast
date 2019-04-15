@@ -24,7 +24,7 @@ import com.sinoiov.project.monitor.online.service.IUserOnlineService;
 /**
  * 在线用户监控
  * 
- * @author ruoyi
+ * @author tony
  */
 @Controller
 @RequestMapping("/monitor/online")

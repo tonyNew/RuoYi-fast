@@ -10,7 +10,7 @@ import com.sinoiov.framework.web.controller.BaseController;
 /**
  * druid 监控
  * 
- * @author ruoyi
+ * @author tony
  */
 @Controller
 @RequestMapping("/monitor/data")

@@ -3,7 +3,7 @@ package com.sinoiov.project.system.user.domain;
 /**
  * 用户状态
  * 
- * @author ruoyi
+ * @author tony
  *
  */
 public enum UserStatus

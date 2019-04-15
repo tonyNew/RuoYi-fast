@@ -7,7 +7,7 @@ import com.sinoiov.project.system.role.domain.Role;
 /**
  * 角色表 数据层
  * 
- * @author ruoyi
+ * @author tony
  */
 public interface RoleMapper
 {

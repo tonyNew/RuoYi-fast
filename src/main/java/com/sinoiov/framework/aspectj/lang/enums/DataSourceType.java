@@ -3,7 +3,7 @@ package com.sinoiov.framework.aspectj.lang.enums;
 /**
  * 数据源
  * 
- * @author ruoyi
+ * @author tony
  */
 public enum DataSourceType
 {

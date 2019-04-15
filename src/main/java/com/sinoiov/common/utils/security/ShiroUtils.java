@@ -16,7 +16,7 @@ import org.apache.shiro.subject.SimplePrincipalCollection;
 /**
  * shiro 工具类
  * 
- * @author ruoyi
+ * @author tony
  */
 public class ShiroUtils
 {

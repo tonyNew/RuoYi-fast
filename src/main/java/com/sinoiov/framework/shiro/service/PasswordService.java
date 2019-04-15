@@ -20,7 +20,7 @@ import com.sinoiov.project.system.user.domain.User;
 /**
  * 登录密码方法
  * 
- * @author ruoyi
+ * @author tony
  */
 @Component
 public class PasswordService

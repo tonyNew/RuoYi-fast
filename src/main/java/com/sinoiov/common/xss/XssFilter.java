@@ -19,7 +19,7 @@ import com.sinoiov.common.utils.StringUtils;
 /**
  * 防止XSS攻击的过滤器
  * 
- * @author ruoyi
+ * @author tony
  */
 public class XssFilter implements Filter
 {

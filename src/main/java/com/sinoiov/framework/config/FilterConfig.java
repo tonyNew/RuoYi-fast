@@ -13,7 +13,7 @@ import com.sinoiov.common.xss.XssFilter;
 /**
  * Filter配置
  *
- * @author ruoyi
+ * @author tony
  */
 @Configuration
 public class FilterConfig

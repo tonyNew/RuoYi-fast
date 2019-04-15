@@ -25,7 +25,7 @@ import com.sinoiov.project.system.user.mapper.UserRoleMapper;
 /**
  * 用户 业务层处理
  * 
- * @author ruoyi
+ * @author tony
  */
 @Service
 public class UserServiceImpl implements IUserService

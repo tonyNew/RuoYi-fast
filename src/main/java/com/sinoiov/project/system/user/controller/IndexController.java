@@ -15,7 +15,7 @@ import com.sinoiov.project.system.user.domain.User;
 /**
  * 首页 业务处理
  * 
- * @author ruoyi
+ * @author tony
  */
 @Controller
 public class IndexController extends BaseController

@@ -9,7 +9,7 @@ import com.sinoiov.framework.web.domain.BaseEntity;
 /**
  * 岗位表 sys_post
  * 
- * @author ruoyi
+ * @author tony
  */
 public class Post extends BaseEntity
 {

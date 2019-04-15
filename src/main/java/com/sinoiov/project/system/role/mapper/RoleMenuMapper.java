@@ -7,7 +7,7 @@ import com.sinoiov.project.system.role.domain.RoleMenu;
 /**
  * 角色与菜单关联表 数据层
  * 
- * @author ruoyi
+ * @author tony
  */
 public interface RoleMenuMapper
 {

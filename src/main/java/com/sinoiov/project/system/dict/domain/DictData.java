@@ -9,7 +9,7 @@ import com.sinoiov.framework.web.domain.BaseEntity;
 /**
  * 字典数据表 sys_dict_data
  * 
- * @author ruoyi
+ * @author tony
  */
 public class DictData extends BaseEntity
 {

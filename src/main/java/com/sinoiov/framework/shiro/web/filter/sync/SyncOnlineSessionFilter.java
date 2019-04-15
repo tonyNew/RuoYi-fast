@@ -12,7 +12,7 @@ import com.sinoiov.project.monitor.online.domain.OnlineSession;
 /**
  * 同步Session数据到Db
  * 
- * @author ruoyi
+ * @author tony
  */
 public class SyncOnlineSessionFilter extends PathMatchingFilter
 {

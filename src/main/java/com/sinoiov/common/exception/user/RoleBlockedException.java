@@ -3,7 +3,7 @@ package com.sinoiov.common.exception.user;
 /**
  * 角色锁定异常类
  * 
- * @author ruoyi
+ * @author tony
  */
 public class RoleBlockedException extends UserException
 {

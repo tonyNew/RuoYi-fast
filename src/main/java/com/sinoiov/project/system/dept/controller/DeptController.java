@@ -24,7 +24,7 @@ import com.sinoiov.project.system.role.domain.Role;
 /**
  * 部门信息
  * 
- * @author ruoyi
+ * @author tony
  */
 @Controller
 @RequestMapping("/system/dept")

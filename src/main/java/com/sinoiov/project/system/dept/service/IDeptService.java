@@ -9,7 +9,7 @@ import com.sinoiov.project.system.role.domain.Role;
 /**
  * 部门管理 服务层
  * 
- * @author ruoyi
+ * @author tony
  */
 public interface IDeptService
 {

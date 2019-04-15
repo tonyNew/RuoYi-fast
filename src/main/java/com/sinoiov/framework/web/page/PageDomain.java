@@ -5,7 +5,7 @@ import com.sinoiov.common.utils.StringUtils;
 /**
  * 分页数据
  * 
- * @author ruoyi
+ * @author tony
  */
 public class PageDomain
 {

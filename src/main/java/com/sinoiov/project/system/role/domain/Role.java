@@ -9,7 +9,7 @@ import com.sinoiov.framework.web.domain.BaseEntity;
 /**
  * 角色表 sys_role
  * 
- * @author ruoyi
+ * @author tony
  */
 public class Role extends BaseEntity
 {

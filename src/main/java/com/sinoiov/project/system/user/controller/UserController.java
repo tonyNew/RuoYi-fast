@@ -27,7 +27,7 @@ import com.sinoiov.project.system.user.service.IUserService;
 /**
  * 用户信息
  * 
- * @author ruoyi
+ * @author tony
  */
 @Controller
 @RequestMapping("/system/user")

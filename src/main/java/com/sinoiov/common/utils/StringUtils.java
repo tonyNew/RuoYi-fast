@@ -9,7 +9,7 @@ import com.sinoiov.common.support.StrFormatter;
 /**
  * 字符串工具类
  * 
- * @author ruoyi
+ * @author tony
  */
 public class StringUtils extends org.apache.commons.lang3.StringUtils
 {

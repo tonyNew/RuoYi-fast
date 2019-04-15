@@ -7,7 +7,7 @@ import com.sinoiov.project.system.user.domain.User;
 /**
  * 用户 业务层
  * 
- * @author ruoyi
+ * @author tony
  */
 public interface IUserService
 {

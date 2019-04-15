@@ -14,7 +14,7 @@ import com.sinoiov.framework.web.domain.AjaxResult;
 /**
  * 自定义异常处理器
  * 
- * @author ruoyi
+ * @author tony
  */
 @RestControllerAdvice
 public class DefaultExceptionHandler

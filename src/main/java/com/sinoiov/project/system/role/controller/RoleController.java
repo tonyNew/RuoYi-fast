@@ -24,7 +24,7 @@ import com.sinoiov.project.system.role.service.IRoleService;
 /**
  * 角色信息
  * 
- * @author ruoyi
+ * @author tony
  */
 @Controller
 @RequestMapping("/system/role")

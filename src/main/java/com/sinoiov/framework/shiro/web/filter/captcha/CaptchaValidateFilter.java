@@ -12,7 +12,7 @@ import com.sinoiov.common.utils.security.ShiroUtils;
 /**
  * 验证码过滤器
  * 
- * @author ruoyi
+ * @author tony
  */
 public class CaptchaValidateFilter extends AccessControlFilter
 {

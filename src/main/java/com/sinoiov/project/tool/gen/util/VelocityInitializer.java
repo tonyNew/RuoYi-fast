@@ -8,7 +8,7 @@ import com.sinoiov.common.constant.Constants;
 /**
  * VelocityEngine工厂
  * 
- * @author RuoYi
+ * @author tony
  */
 public class VelocityInitializer
 {

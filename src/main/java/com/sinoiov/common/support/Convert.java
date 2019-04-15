@@ -12,7 +12,7 @@ import com.sinoiov.common.utils.StringUtils;
 /**
  * 类型转换器
  * 
- * @author ruoyi
+ * @author tony
  * 
  */
 public class Convert

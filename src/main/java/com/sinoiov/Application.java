@@ -8,7 +8,7 @@ import org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration;
 /**
  * 启动程序
  * 
- * @author ruoyi
+ * @author tony
  */
 @SpringBootApplication(exclude = { DataSourceAutoConfiguration.class })
 @MapperScan("com.sinoiov.project.*.*.mapper")

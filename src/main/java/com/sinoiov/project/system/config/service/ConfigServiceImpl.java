@@ -14,7 +14,7 @@ import com.sinoiov.project.system.config.mapper.ConfigMapper;
 /**
  * 参数配置 服务层实现
  * 
- * @author ruoyi
+ * @author tony
  */
 @Service
 public class ConfigServiceImpl implements IConfigService

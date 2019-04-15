@@ -12,7 +12,7 @@ import com.sinoiov.project.monitor.server.domain.Server;
 /**
  * 服务器监控
  * 
- * @author ruoyi
+ * @author tony
  */
 @Controller
 @RequestMapping("/monitor/server")

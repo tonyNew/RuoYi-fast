@@ -11,7 +11,7 @@ import com.sinoiov.project.monitor.operlog.mapper.OperLogMapper;
 /**
  * 操作日志 服务层处理
  * 
- * @author ruoyi
+ * @author tony
  */
 @Service
 public class OperLogServiceImpl implements IOperLogService

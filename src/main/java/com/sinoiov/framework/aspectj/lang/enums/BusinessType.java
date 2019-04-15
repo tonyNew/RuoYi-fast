@@ -3,7 +3,7 @@ package com.sinoiov.framework.aspectj.lang.enums;
 /**
  * 业务操作类型
  * 
- * @author ruoyi
+ * @author tony
  *
  */
 public enum BusinessType

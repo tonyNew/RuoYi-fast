@@ -19,7 +19,7 @@ import com.sinoiov.framework.web.domain.AjaxResult;
 /**
  * 登录验证
  * 
- * @author ruoyi
+ * @author tony
  */
 @Controller
 public class LoginController extends BaseController
