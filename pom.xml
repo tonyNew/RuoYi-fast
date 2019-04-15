@@ -3,9 +3,9 @@
 		 xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 
-	<groupId>com.ruoyi</groupId>
-	<artifactId>RuoYi</artifactId>
-	<version>3.1.0</version>
+	<groupId>com.sinoiov</groupId>
+	<artifactId>sinoiov-cas-admin</artifactId>
+	<version>1.0.0</version>
 	<packaging>jar</packaging>
 
 	<name>RuoYi</name>
