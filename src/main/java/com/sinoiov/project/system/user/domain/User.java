@@ -85,6 +85,8 @@ public class User extends BaseEntity
 
     /** 岗位组 */
     private Long[] postIds;
+    
+    private String token;
 
     public Long getUserId()
     {
@@ -296,8 +298,16 @@ public class User extends BaseEntity
     {
         this.postIds = postIds;
     }
+    
+    public String getToken() {
+		return token;
+	}
 
-    @Override
+    public void setToken(String token) {
+		this.token = token;
+	}
+
+	@Override
     public String toString() {
         return new ToStringBuilder(this,ToStringStyle.MULTI_LINE_STYLE)
             .append("userId", getUserId())

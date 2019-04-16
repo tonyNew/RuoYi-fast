@@ -2,6 +2,8 @@ package com.sinoiov.project.system.user.service;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import org.apache.shiro.realm.ldap.LdapUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -10,6 +12,7 @@ import com.sinoiov.common.support.Convert;
 import com.sinoiov.common.utils.StringUtils;
 import com.sinoiov.common.utils.security.ShiroUtils;
 import com.sinoiov.framework.aspectj.lang.annotation.DataScope;
+import com.sinoiov.framework.ldap.LdapDao;
 import com.sinoiov.framework.shiro.service.PasswordService;
 import com.sinoiov.project.system.post.domain.Post;
 import com.sinoiov.project.system.post.mapper.PostMapper;
@@ -30,6 +33,8 @@ import com.sinoiov.project.system.user.mapper.UserRoleMapper;
 @Service
 public class UserServiceImpl implements IUserService
 {
+	@Autowired
+    private LdapDao ldapDao;
     @Autowired
     private UserMapper userMapper;
 
@@ -156,6 +161,7 @@ public class UserServiceImpl implements IUserService
     @Override
     public int insertUser(User user)
     {
+    	ldapDao.addUser(user);
         user.randomSalt();
         user.setPassword(passwordService.encryptPassword(user.getLoginName(), user.getPassword(), user.getSalt()));
         user.setCreateBy(ShiroUtils.getLoginName());
@@ -211,6 +217,7 @@ public class UserServiceImpl implements IUserService
     @Override
     public int resetUserPwd(User user)
     {
+    	ldapDao.resetUserPwd(user);
         user.randomSalt();
         user.setPassword(passwordService.encryptPassword(user.getLoginName(), user.getPassword(), user.getSalt()));
         return updateUserInfo(user);
@@ -356,4 +363,10 @@ public class UserServiceImpl implements IUserService
         }
         return idsStr.toString();
     }
+
+	@Override
+	public User selectUserByLoginToken(String token) {
+		return userMapper.selectUserByLoginToken(token);
+	}
+    
 }

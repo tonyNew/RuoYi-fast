@@ -82,7 +82,12 @@ public class PasswordService
     {
         return new Md5Hash(username + password + salt).toHex().toString();
     }
-
+    
+    public boolean passwordValidByDb() {
+		return false;
+    	
+    }
+    
     public static void main(String[] args)
     {
         System.out.println(new PasswordService().encryptPassword("admin", "admin123", "111111"));

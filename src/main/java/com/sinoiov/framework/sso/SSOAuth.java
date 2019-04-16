@@ -1,4 +1,4 @@
-package com.sinoiov.sso;
+package com.sinoiov.framework.sso;
 
 import java.io.Serializable;
 
@@ -7,7 +7,7 @@ import java.io.Serializable;
  * 创建于：2019年4月9日
  * 描    述：
 */
-public class LogInAuth implements Serializable{
+public class SSOAuth implements Serializable{
 	private static final long serialVersionUID = 3841194866174936388L;
 	private String userName;
 	private String passWord;

@@ -26,6 +26,13 @@ public interface IUserService
      * @return 用户对象信息
      */
     public User selectUserByLoginName(String userName);
+    
+    /* 通过用户名查询用户
+    * 
+    * @param userName 用户名
+    * @return 用户对象信息
+    */
+   public User selectUserByLoginToken(String token);
 
     /**
      * 通过手机号码查询用户

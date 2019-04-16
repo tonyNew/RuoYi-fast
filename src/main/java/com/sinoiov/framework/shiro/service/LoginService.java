@@ -1,7 +1,6 @@
 package com.sinoiov.framework.shiro.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
 import org.springframework.util.StringUtils;
 
 import com.sinoiov.common.constant.Constants;
@@ -18,6 +17,7 @@ import com.sinoiov.common.utils.ServletUtils;
 import com.sinoiov.common.utils.security.ShiroUtils;
 import com.sinoiov.framework.manager.AsyncManager;
 import com.sinoiov.framework.manager.factory.AsyncFactory;
+import com.sinoiov.framework.sso.service.ISSOTokenService;
 import com.sinoiov.project.system.user.domain.User;
 import com.sinoiov.project.system.user.domain.UserStatus;
 import com.sinoiov.project.system.user.service.IUserService;
@@ -27,14 +27,18 @@ import com.sinoiov.project.system.user.service.IUserService;
  * 
  * @author tony
  */
-@Component
-public class LoginService
-{
+public abstract class LoginService{
+	
+	
     @Autowired
-    private PasswordService passwordService;
+    protected ISSOTokenService sSOTokenService;
+    @Autowired
+    protected PasswordService passwordService;
 
     @Autowired
     private IUserService userService;
+    
+    abstract boolean validatePassword(User user, String password);
 
     /**
      * 登录
@@ -99,15 +103,16 @@ public class LoginService
             AsyncManager.me().execute(AsyncFactory.recordLogininfor(username, Constants.LOGIN_FAIL, MessageUtils.message("user.blocked", user.getRemark())));
             throw new UserBlockedException(user.getRemark());
         }
-
-        passwordService.validate(user, password);
+        validatePassword(user, password);
 
         AsyncManager.me().execute(AsyncFactory.recordLogininfor(username, Constants.LOGIN_SUCCESS, MessageUtils.message("user.login.success")));
         recordLoginInfo(user);
+        sSOTokenService.saveToken(user);
         return user;
     }
 
-    private boolean maybeEmail(String username)
+
+	private boolean maybeEmail(String username)
     {
         if (!username.matches(UserConstants.EMAIL_PATTERN))
         {

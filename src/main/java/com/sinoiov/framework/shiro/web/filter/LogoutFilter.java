@@ -11,8 +11,10 @@ import com.sinoiov.common.constant.Constants;
 import com.sinoiov.common.utils.MessageUtils;
 import com.sinoiov.common.utils.StringUtils;
 import com.sinoiov.common.utils.security.ShiroUtils;
+import com.sinoiov.common.utils.spring.SpringUtils;
 import com.sinoiov.framework.manager.AsyncManager;
 import com.sinoiov.framework.manager.factory.AsyncFactory;
+import com.sinoiov.framework.sso.service.ISSOTokenService;
 import com.sinoiov.project.system.user.domain.User;
 
 /**
@@ -54,6 +56,7 @@ public class LogoutFilter extends org.apache.shiro.web.filter.authc.LogoutFilter
                     String loginName = user.getLoginName();
                     // 记录用户退出日志
                     AsyncManager.me().execute(AsyncFactory.recordLogininfor(loginName, Constants.LOGOUT, MessageUtils.message("user.logout.success")));
+                    SpringUtils.getBean(ISSOTokenService.class).clearToken(user);
                 }
                 // 退出登录
                 subject.logout();
