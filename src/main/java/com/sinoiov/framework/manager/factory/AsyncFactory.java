@@ -1,6 +1,7 @@
 package com.sinoiov.framework.manager.factory;
 
 import java.util.TimerTask;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -12,9 +13,6 @@ import com.sinoiov.common.utils.security.ShiroUtils;
 import com.sinoiov.common.utils.spring.SpringUtils;
 import com.sinoiov.project.monitor.logininfor.domain.Logininfor;
 import com.sinoiov.project.monitor.logininfor.service.LogininforServiceImpl;
-import com.sinoiov.project.monitor.online.domain.OnlineSession;
-import com.sinoiov.project.monitor.online.domain.UserOnline;
-import com.sinoiov.project.monitor.online.service.IUserOnlineService;
 import com.sinoiov.project.monitor.operlog.domain.OperLog;
 import com.sinoiov.project.monitor.operlog.service.IOperLogService;
 
@@ -29,38 +27,6 @@ import eu.bitwalker.useragentutils.UserAgent;
 public class AsyncFactory
 {
     private static final Logger sys_user_logger = LoggerFactory.getLogger("sys-user");
-
-    /**
-     * 同步session到数据库
-     * 
-     * @param session 在线用户会话
-     * @return 任务task
-     */
-    public static TimerTask syncSessionToDb(final OnlineSession session)
-    {
-        return new TimerTask()
-        {
-            @Override
-            public void run()
-            {
-                UserOnline online = new UserOnline();
-                online.setSessionId(String.valueOf(session.getId()));
-                online.setDeptName(session.getDeptName());
-                online.setLoginName(session.getLoginName());
-                online.setStartTimestamp(session.getStartTimestamp());
-                online.setLastAccessTime(session.getLastAccessTime());
-                online.setExpireTime(session.getTimeout());
-                online.setIpaddr(session.getHost());
-                online.setLoginLocation(AddressUtils.getRealAddressByIP(session.getHost()));
-                online.setBrowser(session.getBrowser());
-                online.setOs(session.getOs());
-                online.setStatus(session.getStatus());
-                online.setSession(session);
-                SpringUtils.getBean(IUserOnlineService.class).saveOnline(online);
-
-            }
-        };
-    }
 
     /**
      * 操作日志记录

@@ -1,6 +1,7 @@
 package com.sinoiov.project.system.user.controller;
 
 import java.util.List;
+
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -19,7 +20,6 @@ import com.sinoiov.framework.aspectj.lang.enums.BusinessType;
 import com.sinoiov.framework.web.controller.BaseController;
 import com.sinoiov.framework.web.domain.AjaxResult;
 import com.sinoiov.framework.web.page.TableDataInfo;
-import com.sinoiov.project.system.post.service.IPostService;
 import com.sinoiov.project.system.role.service.IRoleService;
 import com.sinoiov.project.system.user.domain.User;
 import com.sinoiov.project.system.user.service.IUserService;
@@ -40,9 +40,6 @@ public class UserController extends BaseController
 
     @Autowired
     private IRoleService roleService;
-
-    @Autowired
-    private IPostService postService;
 
     @RequiresPermissions("system:user:view")
     @GetMapping()
@@ -79,7 +76,6 @@ public class UserController extends BaseController
     public String add(ModelMap mmap)
     {
         mmap.put("roles", roleService.selectRoleAll());
-        mmap.put("posts", postService.selectPostAll());
         return prefix + "/add";
     }
 
@@ -108,7 +104,6 @@ public class UserController extends BaseController
     {
         mmap.put("user", userService.selectUserById(userId));
         mmap.put("roles", roleService.selectRolesByUserId(userId));
-        mmap.put("posts", postService.selectPostsByUserId(userId));
         return prefix + "/edit";
     }
 

@@ -1,14 +1,14 @@
 package com.sinoiov.project.system.user.domain;
 
-import org.apache.commons.lang3.builder.ToStringBuilder;
-import org.apache.commons.lang3.builder.ToStringStyle;
 import java.util.Date;
 import java.util.List;
+
+import org.apache.commons.lang3.builder.ToStringBuilder;
+import org.apache.commons.lang3.builder.ToStringStyle;
 import org.apache.shiro.crypto.SecureRandomNumberGenerator;
 
 import com.sinoiov.framework.aspectj.lang.annotation.Excel;
 import com.sinoiov.framework.web.domain.BaseEntity;
-import com.sinoiov.project.system.dept.domain.Dept;
 import com.sinoiov.project.system.role.domain.Role;
 
 /**
@@ -73,9 +73,6 @@ public class User extends BaseEntity
     /** 最后登陆时间 */
     @Excel(name = "最后登陆时间", width = 30, dateFormat = "yyyy-MM-dd HH:mm:ss")
     private Date loginDate;
-
-    /** 部门对象 */
-    private Dept dept;
 
     /** 角色集合 */
     private List<Role> roles;
@@ -257,16 +254,6 @@ public class User extends BaseEntity
     public void setLoginDate(Date loginDate)
     {
         this.loginDate = loginDate;
-    }
-
-    public Dept getDept()
-    {
-        return dept;
-    }
-
-    public void setDept(Dept dept)
-    {
-        this.dept = dept;
     }
 
     public List<Role> getRoles()

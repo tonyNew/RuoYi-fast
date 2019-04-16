@@ -139,11 +139,4 @@ public interface IUserService
      */
     public String selectUserRoleGroup(Long userId);
 
-    /**
-     * 根据用户ID查询用户所属岗位组
-     * 
-     * @param userId 用户ID
-     * @return 结果
-     */
-    public String selectUserPostGroup(Long userId);
 }
