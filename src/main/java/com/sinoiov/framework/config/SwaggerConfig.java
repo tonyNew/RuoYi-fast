@@ -23,7 +23,7 @@ public class SwaggerConfig
 {
     /** 系统基础配置 */
     @Autowired
-    private RuoYiConfig ruoYiConfig;
+    private SinoiovConfig ruoYiConfig;
 
     /**
      * 创建API

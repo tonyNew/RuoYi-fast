@@ -10,7 +10,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.sinoiov.common.utils.file.FileUtils;
-import com.sinoiov.framework.config.RuoYiConfig;
+import com.sinoiov.framework.config.SinoiovConfig;
 
 /**
  * 通用请求处理
@@ -28,7 +28,7 @@ public class CommonController
         String realFileName = System.currentTimeMillis() + fileName.substring(fileName.indexOf("_") + 1);
         try
         {
-            String filePath = RuoYiConfig.getDownloadPath() + fileName;
+            String filePath = SinoiovConfig.getDownloadPath() + fileName;
 
             response.setCharacterEncoding("utf-8");
             response.setContentType("multipart/form-data");

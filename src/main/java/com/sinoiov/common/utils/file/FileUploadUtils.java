@@ -7,7 +7,7 @@ import org.apache.tomcat.util.http.fileupload.FileUploadBase.FileSizeLimitExceed
 import org.springframework.web.multipart.MultipartFile;
 
 import com.sinoiov.common.exception.file.FileNameLengthLimitExceededException;
-import com.sinoiov.framework.config.RuoYiConfig;
+import com.sinoiov.framework.config.SinoiovConfig;
 
 /**
  * 文件上传工具类
@@ -24,7 +24,7 @@ public class FileUploadUtils
     /**
      * 默认上传的地址
      */
-    private static String defaultBaseDir = RuoYiConfig.getProfile();
+    private static String defaultBaseDir = SinoiovConfig.getProfile();
 
     /**
      * 默认的文件名最大长度

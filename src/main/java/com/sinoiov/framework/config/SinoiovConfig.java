@@ -9,8 +9,8 @@ import org.springframework.stereotype.Component;
  * @author tony
  */
 @Component
-@ConfigurationProperties(prefix = "ruoyi")
-public class RuoYiConfig
+@ConfigurationProperties(prefix = "sinoiov")
+public class SinoiovConfig
 {
     /** 项目名称 */
     private String name;
@@ -60,7 +60,7 @@ public class RuoYiConfig
 
     public void setProfile(String profile)
     {
-        RuoYiConfig.profile = profile;
+        SinoiovConfig.profile = profile;
     }
 
     public static boolean isAddressEnabled()
@@ -70,7 +70,7 @@ public class RuoYiConfig
 
     public void setAddressEnabled(boolean addressEnabled)
     {
-        RuoYiConfig.addressEnabled = addressEnabled;
+        SinoiovConfig.addressEnabled = addressEnabled;
     }
 
     public static String getAvatarPath()

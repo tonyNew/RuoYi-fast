@@ -2,7 +2,7 @@ package com.sinoiov.common.utils;
 
 import com.alibaba.fastjson.JSONObject;
 import com.sinoiov.common.utils.http.HttpUtils;
-import com.sinoiov.framework.config.RuoYiConfig;
+import com.sinoiov.framework.config.SinoiovConfig;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -26,7 +26,7 @@ public class AddressUtils
         {
             return "内网IP";
         }
-        if (RuoYiConfig.isAddressEnabled())
+        if (SinoiovConfig.isAddressEnabled())
         {
             String rspStr = HttpUtils.sendPost(IP_URL, "ip=" + ip);
             if (StringUtils.isEmpty(rspStr))

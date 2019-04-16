@@ -38,7 +38,7 @@ import org.slf4j.LoggerFactory;
 import com.sinoiov.common.utils.DateUtils;
 import com.sinoiov.common.utils.StringUtils;
 import com.sinoiov.framework.aspectj.lang.annotation.Excel;
-import com.sinoiov.framework.config.RuoYiConfig;
+import com.sinoiov.framework.config.SinoiovConfig;
 import com.sinoiov.framework.web.domain.AjaxResult;
 
 /**
@@ -503,7 +503,7 @@ public class ExcelUtil<T>
      */
     public String getAbsoluteFile(String filename)
     {
-        String downloadPath = RuoYiConfig.getDownloadPath() + filename;
+        String downloadPath = SinoiovConfig.getDownloadPath() + filename;
         File desc = new File(downloadPath);
         if (!desc.getParentFile().exists())
         {

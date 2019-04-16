@@ -6,7 +6,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
 
-import com.sinoiov.framework.config.RuoYiConfig;
+import com.sinoiov.framework.config.SinoiovConfig;
 import com.sinoiov.framework.web.controller.BaseController;
 import com.sinoiov.project.system.menu.domain.Menu;
 import com.sinoiov.project.system.menu.service.IMenuService;
@@ -24,7 +24,7 @@ public class IndexController extends BaseController
     private IMenuService menuService;
 
     @Autowired
-    private RuoYiConfig ruoYiConfig;
+    private SinoiovConfig ruoYiConfig;
 
     // 系统首页
     @GetMapping("/index")

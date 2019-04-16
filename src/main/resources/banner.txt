@@ -1,3 +1,6 @@
-Application Version: ${ruoyi.version}
+Application Version: ${sinoiov.version}
 Spring Boot Version: ${spring-boot.version}
-中交兴路后管系统
+,---.|,   .,---.|,---..    ,    |--.--    ,---.,---.,   .--.--,---.,---.
+`---.||\  ||   |||   ||    |    |  |      |    |--- |\  |  |  |--- |---'
+    ||| \ ||   |||   | \  /     |  |      |    |    | \ |  |  |    |  \ 
+`---'``  `'`---'``---'  `'      `  `      `---'`---'`  `'  `  `---'`   `

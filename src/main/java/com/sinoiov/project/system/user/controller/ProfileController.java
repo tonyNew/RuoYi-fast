@@ -17,7 +17,7 @@ import org.springframework.web.multipart.MultipartFile;
 import com.sinoiov.common.utils.file.FileUploadUtils;
 import com.sinoiov.framework.aspectj.lang.annotation.Log;
 import com.sinoiov.framework.aspectj.lang.enums.BusinessType;
-import com.sinoiov.framework.config.RuoYiConfig;
+import com.sinoiov.framework.config.SinoiovConfig;
 import com.sinoiov.framework.web.controller.BaseController;
 import com.sinoiov.framework.web.domain.AjaxResult;
 import com.sinoiov.framework.web.service.DictService;
@@ -138,7 +138,7 @@ public class ProfileController extends BaseController
         {
             if (!file.isEmpty())
             {
-                String avatar = FileUploadUtils.upload(RuoYiConfig.getAvatarPath(), file);
+                String avatar = FileUploadUtils.upload(SinoiovConfig.getAvatarPath(), file);
                 user.setAvatar(avatar);
                 if (userService.updateUserInfo(user) > 0)
                 {
