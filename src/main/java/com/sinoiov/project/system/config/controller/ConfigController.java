@@ -25,7 +25,7 @@ import com.sinoiov.project.system.config.service.IConfigService;
  * 
  * @author tony
  */
-@Controller
+//@Controller
 @RequestMapping("/system/config")
 public class ConfigController extends BaseController
 {

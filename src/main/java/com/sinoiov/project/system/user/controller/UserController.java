@@ -24,11 +24,14 @@ import com.sinoiov.project.system.role.service.IRoleService;
 import com.sinoiov.project.system.user.domain.User;
 import com.sinoiov.project.system.user.service.IUserService;
 
+import io.swagger.annotations.Api;
+
 /**
  * 用户信息
  * 
  * @author tony
  */
+@Api(description="用户管理")
 @Controller
 @RequestMapping("/system/user")
 public class UserController extends BaseController

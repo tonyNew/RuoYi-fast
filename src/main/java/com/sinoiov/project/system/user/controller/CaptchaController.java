@@ -21,7 +21,7 @@ import com.sinoiov.framework.web.controller.BaseController;
  * 
  * @author tony
  */
-@Controller
+//@Controller
 @RequestMapping("/captcha")
 public class CaptchaController extends BaseController
 {

@@ -21,11 +21,14 @@ import com.sinoiov.framework.web.page.TableDataInfo;
 import com.sinoiov.project.system.role.domain.Role;
 import com.sinoiov.project.system.role.service.IRoleService;
 
+import io.swagger.annotations.Api;
+
 /**
  * 角色信息
  * 
  * @author tony
  */
+@Api(description="角色管理")
 @Controller
 @RequestMapping("/system/role")
 public class RoleController extends BaseController

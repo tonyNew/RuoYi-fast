@@ -17,7 +17,7 @@ import com.sinoiov.framework.config.SinoiovConfig;
  * 
  * @author tony
  */
-@Controller
+//@Controller
 public class CommonController
 {
     private static final Logger log = LoggerFactory.getLogger(CommonController.class);

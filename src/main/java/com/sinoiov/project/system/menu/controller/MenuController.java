@@ -20,11 +20,14 @@ import com.sinoiov.project.system.menu.domain.Menu;
 import com.sinoiov.project.system.menu.service.IMenuService;
 import com.sinoiov.project.system.role.domain.Role;
 
+import io.swagger.annotations.Api;
+
 /**
  * 菜单信息
  * 
  * @author tony
  */
+@Api(description="菜单管理")
 @Controller
 @RequestMapping("/system/menu")
 public class MenuController extends BaseController

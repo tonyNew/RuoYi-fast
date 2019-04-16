@@ -12,7 +12,7 @@ import com.sinoiov.framework.web.controller.BaseController;
  * 
  * @author tony
  */
-@Controller
+//@Controller
 @RequestMapping("/monitor/data")
 public class DruidController extends BaseController
 {

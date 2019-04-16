@@ -7,21 +7,20 @@ import org.apache.shiro.authc.AuthenticationException;
 import org.apache.shiro.authc.UsernamePasswordToken;
 import org.apache.shiro.subject.Subject;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.sinoiov.common.domain.Result;
 import com.sinoiov.common.utils.StringUtils;
+import com.sinoiov.common.utils.security.ShiroUtils;
 import com.sinoiov.framework.sso.service.ISSOTokenService;
-import com.sinoiov.framework.web.domain.AjaxResult;
 import com.sinoiov.project.system.user.domain.User;
 import com.sinoiov.project.system.user.service.IUserService;
 import com.sinoiov.utils.ResultUtils;
 
+import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 
 /**
@@ -29,6 +28,7 @@ import io.swagger.annotations.ApiOperation;
  * 创建于：2019年4月9日
  * 描    述：
 */
+@Api(description="单点登录")
 @RestController
 @RequestMapping("/sso")
 public class SsoServerController {
@@ -39,15 +39,17 @@ public class SsoServerController {
 	@Autowired
 	IUserService userService;
 	
+	@ApiOperation("登陆")
 	@RequestMapping(value="/login",method= {RequestMethod.GET,RequestMethod.POST})
-    public Result<String> ajaxLogin(String username, String password, Boolean rememberMe)
+    public Result<String> login(String username, String password, Boolean rememberMe)
     {
         UsernamePasswordToken token = new UsernamePasswordToken(username, password, rememberMe);
         Subject subject = SecurityUtils.getSubject();
         try
         {
             subject.login(token);
-            String ssoToken = sSOTokenService.selectTokenByUser(Objects.toString(subject.getPrincipal()));
+            User user = ShiroUtils.getSysUser();
+            String ssoToken = sSOTokenService.selectTokenByUser(user.getLoginName());
             return ResultUtils.WrapSuccess(ssoToken);
         }
         catch (AuthenticationException e)

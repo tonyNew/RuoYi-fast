@@ -23,7 +23,7 @@ import com.sinoiov.project.monitor.logininfor.service.ILogininforService;
  * 
  * @author tony
  */
-@Controller
+//@Controller
 @RequestMapping("/monitor/logininfor")
 public class LogininforController extends BaseController
 {

@@ -29,7 +29,7 @@ import com.sinoiov.project.system.user.service.IUserService;
  * 
  * @author tony
  */
-@Controller
+//@Controller
 @RequestMapping("/system/user/profile")
 public class ProfileController extends BaseController
 {

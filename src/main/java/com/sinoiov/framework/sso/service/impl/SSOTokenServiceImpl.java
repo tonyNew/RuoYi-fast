@@ -9,6 +9,7 @@ import com.sinoiov.common.utils.RandomUtils;
 import com.sinoiov.framework.sso.service.ISSOTokenService;
 import com.sinoiov.project.system.user.domain.User;
 import com.sinoiov.project.system.user.mapper.UserMapper;
+import com.sinoiov.utils.StringUtils;
 
 /**
  * 作    者： niuyi@sinoiov.com
@@ -22,7 +23,9 @@ public class SSOTokenServiceImpl implements ISSOTokenService {
 
 	@Override
 	public void saveToken(User user) {
-		user.setToken(RandomUtils.gen());
+		if(StringUtils.isNull(user.getToken())) {
+			user.setToken(RandomUtils.gen());
+		}
 		userMapper.updateUser(user);
 		
 	}

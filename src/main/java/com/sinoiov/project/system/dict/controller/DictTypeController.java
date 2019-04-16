@@ -25,7 +25,7 @@ import com.sinoiov.project.system.dict.service.IDictTypeService;
  * 
  * @author tony
  */
-@Controller
+//@Controller
 @RequestMapping("/system/dict")
 public class DictTypeController extends BaseController
 {

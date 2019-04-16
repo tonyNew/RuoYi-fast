@@ -25,7 +25,7 @@ import com.sinoiov.project.monitor.operlog.service.IOperLogService;
  * 
  * @author tony
  */
-@Controller
+//@Controller
 @RequestMapping("/monitor/operlog")
 public class OperlogController extends BaseController
 {
