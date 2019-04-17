@@ -40,10 +40,10 @@ public class SsoServerController {
 	IUserService userService;
 	
 	@ApiOperation("登陆")
-	@RequestMapping(value="/login",method= {RequestMethod.GET,RequestMethod.POST})
-    public Result<String> login(String username, String password, Boolean rememberMe)
+	@RequestMapping(value="/login",method= {RequestMethod.POST})
+    public Result<String> login(String username, String password)
     {
-        UsernamePasswordToken token = new UsernamePasswordToken(username, password, rememberMe);
+        UsernamePasswordToken token = new UsernamePasswordToken(username, password);
         Subject subject = SecurityUtils.getSubject();
         try
         {
