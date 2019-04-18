@@ -5,13 +5,16 @@ import java.util.Map;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.RestController;
 
+import com.sinoiov.common.domain.Result;
 import com.sinoiov.framework.aspectj.lang.annotation.Log;
 import com.sinoiov.framework.aspectj.lang.enums.BusinessType;
 import com.sinoiov.framework.web.controller.BaseController;
@@ -19,6 +22,7 @@ import com.sinoiov.framework.web.domain.AjaxResult;
 import com.sinoiov.project.system.menu.domain.Menu;
 import com.sinoiov.project.system.menu.service.IMenuService;
 import com.sinoiov.project.system.role.domain.Role;
+import com.sinoiov.utils.ResultUtils;
 
 import io.swagger.annotations.Api;
 
@@ -28,8 +32,8 @@ import io.swagger.annotations.Api;
  * @author tony
  */
 @Api(description="菜单管理")
-@Controller
 @RequestMapping("/system/menu")
+@RestController
 public class MenuController extends BaseController
 {
     private String prefix = "system/menu";
@@ -37,20 +41,13 @@ public class MenuController extends BaseController
     @Autowired
     private IMenuService menuService;
 
-    @RequiresPermissions("system:menu:view")
-    @GetMapping()
-    public String menu()
-    {
-        return prefix + "/menu";
-    }
 
     @RequiresPermissions("system:menu:list")
     @GetMapping("/list")
-    @ResponseBody
-    public List<Menu> list(Menu menu)
+    public Result<List<Menu>>  list(Menu menu)
     {
         List<Menu> menuList = menuService.selectMenuList(menu);
-        return menuList;
+        return ResultUtils.WrapSuccess(menuList);
     }
 
     /**
@@ -58,41 +55,20 @@ public class MenuController extends BaseController
      */
     @Log(title = "菜单管理", businessType = BusinessType.DELETE)
     @RequiresPermissions("system:menu:remove")
-    @PostMapping("/remove/{menuId}")
-    @ResponseBody
-    public AjaxResult remove(@PathVariable("menuId") Long menuId)
+    @PostMapping("/del")
+    public AjaxResult del( Long id)
     {
-        if (menuService.selectCountMenuByParentId(menuId) > 0)
+        if (menuService.selectCountMenuByParentId(id) > 0)
         {
             return error(1, "存在子菜单,不允许删除");
         }
-        if (menuService.selectCountRoleMenuByMenuId(menuId) > 0)
+        if (menuService.selectCountRoleMenuByMenuId(id) > 0)
         {
             return error(1, "菜单已分配,不允许删除");
         }
-        return toAjax(menuService.deleteMenuById(menuId));
+        return toAjax(menuService.deleteMenuById(id));
     }
 
-    /**
-     * 新增
-     */
-    @GetMapping("/add/{parentId}")
-    public String add(@PathVariable("parentId") Long parentId, ModelMap mmap)
-    {
-        Menu menu = null;
-        if (0L != parentId)
-        {
-            menu = menuService.selectMenuById(parentId);
-        }
-        else
-        {
-            menu = new Menu();
-            menu.setMenuId(0L);
-            menu.setMenuName("主目录");
-        }
-        mmap.put("menu", menu);
-        return prefix + "/add";
-    }
 
     /**
      * 新增保存菜单
@@ -100,20 +76,10 @@ public class MenuController extends BaseController
     @Log(title = "菜单管理", businessType = BusinessType.INSERT)
     @RequiresPermissions("system:menu:add")
     @PostMapping("/add")
-    @ResponseBody
+    @Transactional
     public AjaxResult addSave(Menu menu)
     {
         return toAjax(menuService.insertMenu(menu));
-    }
-
-    /**
-     * 修改菜单
-     */
-    @GetMapping("/edit/{menuId}")
-    public String edit(@PathVariable("menuId") Long menuId, ModelMap mmap)
-    {
-        mmap.put("menu", menuService.selectMenuById(menuId));
-        return prefix + "/edit";
     }
 
     /**
@@ -121,30 +87,19 @@ public class MenuController extends BaseController
      */
     @Log(title = "菜单管理", businessType = BusinessType.UPDATE)
     @RequiresPermissions("system:menu:edit")
-    @PostMapping("/edit")
-    @ResponseBody
+    @PostMapping("/update")
     public AjaxResult editSave(Menu menu)
     {
         return toAjax(menuService.updateMenu(menu));
     }
 
     /**
-     * 选择菜单图标
-     */
-    @GetMapping("/icon")
-    public String icon()
-    {
-        return prefix + "/icon";
-    }
-
-    /**
      * 校验菜单名称
      */
     @PostMapping("/checkMenuNameUnique")
-    @ResponseBody
-    public String checkMenuNameUnique(Menu menu)
+    public Result<String> checkMenuNameUnique(Menu menu)
     {
-        return menuService.checkMenuNameUnique(menu);
+        return ResultUtils.WrapSuccess(menuService.checkMenuNameUnique(menu));
     }
 
     /**
@@ -169,13 +124,4 @@ public class MenuController extends BaseController
         return tree;
     }
 
-    /**
-     * 选择菜单树
-     */
-    @GetMapping("/selectMenuTree/{menuId}")
-    public String selectMenuTree(@PathVariable("menuId") Long menuId, ModelMap mmap)
-    {
-        mmap.put("menu", menuService.selectMenuById(menuId));
-        return prefix + "/tree";
-    }
 }

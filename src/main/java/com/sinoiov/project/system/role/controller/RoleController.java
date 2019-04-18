@@ -11,7 +11,9 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.RestController;
 
+import com.sinoiov.common.domain.Result;
 import com.sinoiov.common.utils.poi.ExcelUtil;
 import com.sinoiov.framework.aspectj.lang.annotation.Log;
 import com.sinoiov.framework.aspectj.lang.enums.BusinessType;
@@ -20,6 +22,7 @@ import com.sinoiov.framework.web.domain.AjaxResult;
 import com.sinoiov.framework.web.page.TableDataInfo;
 import com.sinoiov.project.system.role.domain.Role;
 import com.sinoiov.project.system.role.service.IRoleService;
+import com.sinoiov.utils.ResultUtils;
 
 import io.swagger.annotations.Api;
 
@@ -29,8 +32,8 @@ import io.swagger.annotations.Api;
  * @author tony
  */
 @Api(description="角色管理")
-@Controller
 @RequestMapping("/system/role")
+@RestController
 public class RoleController extends BaseController
 {
     private String prefix = "system/role";
@@ -38,21 +41,14 @@ public class RoleController extends BaseController
     @Autowired
     private IRoleService roleService;
 
-    @RequiresPermissions("system:role:view")
-    @GetMapping()
-    public String role()
-    {
-        return prefix + "/role";
-    }
-
     @RequiresPermissions("system:role:list")
-    @PostMapping("/list")
+    @GetMapping("/list")
     @ResponseBody
-    public TableDataInfo list(Role role)
+    public Result<TableDataInfo> list(Role role)
     {
         startPage();
         List<Role> list = roleService.selectRoleList(role);
-        return getDataTable(list);
+        return ResultUtils.WrapSuccess(getDataTable(list));
     }
 
     @Log(title = "角色管理", businessType = BusinessType.EXPORT)
@@ -66,14 +62,6 @@ public class RoleController extends BaseController
         return util.exportExcel(list, "role");
     }
 
-    /**
-     * 新增角色
-     */
-    @GetMapping("/add")
-    public String add()
-    {
-        return prefix + "/add";
-    }
 
     /**
      * 新增保存角色
@@ -82,44 +70,23 @@ public class RoleController extends BaseController
     @Log(title = "角色管理", businessType = BusinessType.INSERT)
     @PostMapping("/add")
     @Transactional(rollbackFor = Exception.class)
-    @ResponseBody
     public AjaxResult addSave(Role role)
     {
         return toAjax(roleService.insertRole(role));
 
     }
 
-    /**
-     * 修改角色
-     */
-    @GetMapping("/edit/{roleId}")
-    public String edit(@PathVariable("roleId") Long roleId, ModelMap mmap)
-    {
-        mmap.put("role", roleService.selectRoleById(roleId));
-        return prefix + "/edit";
-    }
 
     /**
      * 修改保存角色
      */
     @RequiresPermissions("system:role:edit")
     @Log(title = "角色管理", businessType = BusinessType.UPDATE)
-    @PostMapping("/edit")
+    @PostMapping("/update")
     @Transactional(rollbackFor = Exception.class)
-    @ResponseBody
     public AjaxResult editSave(Role role)
     {
         return toAjax(roleService.updateRole(role));
-    }
-
-    /**
-     * 新增数据权限
-     */
-    @GetMapping("/rule/{roleId}")
-    public String rule(@PathVariable("roleId") Long roleId, ModelMap mmap)
-    {
-        mmap.put("role", roleService.selectRoleById(roleId));
-        return prefix + "/rule";
     }
 
     /**
@@ -129,7 +96,6 @@ public class RoleController extends BaseController
     @Log(title = "角色管理", businessType = BusinessType.UPDATE)
     @PostMapping("/rule")
     @Transactional(rollbackFor = Exception.class)
-    @ResponseBody
     public AjaxResult ruleSave(Role role)
     {
         return toAjax(roleService.updateRule(role));
@@ -137,8 +103,7 @@ public class RoleController extends BaseController
 
     @RequiresPermissions("system:role:remove")
     @Log(title = "角色管理", businessType = BusinessType.DELETE)
-    @PostMapping("/remove")
-    @ResponseBody
+    @PostMapping("/del")
     public AjaxResult remove(String ids)
     {
         try
@@ -155,10 +120,9 @@ public class RoleController extends BaseController
      * 校验角色名称
      */
     @PostMapping("/checkRoleNameUnique")
-    @ResponseBody
-    public String checkRoleNameUnique(Role role)
+    public Result<String> checkRoleNameUnique(Role role)
     {
-        return roleService.checkRoleNameUnique(role);
+        return ResultUtils.WrapSuccess(roleService.checkRoleNameUnique(role));
     }
 
     /**
@@ -166,17 +130,9 @@ public class RoleController extends BaseController
      */
     @PostMapping("/checkRoleKeyUnique")
     @ResponseBody
-    public String checkRoleKeyUnique(Role role)
+    public Result<String> checkRoleKeyUnique(Role role)
     {
-        return roleService.checkRoleKeyUnique(role);
+        return ResultUtils.WrapSuccess(roleService.checkRoleKeyUnique(role));
     }
 
-    /**
-     * 选择菜单树
-     */
-    @GetMapping("/selectMenuTree")
-    public String selectMenuTree()
-    {
-        return prefix + "/tree";
-    }
 }

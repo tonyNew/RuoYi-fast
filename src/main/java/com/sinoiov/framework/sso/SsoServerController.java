@@ -1,11 +1,13 @@
 package com.sinoiov.framework.sso;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.AuthenticationException;
 import org.apache.shiro.authc.UsernamePasswordToken;
 import org.apache.shiro.subject.Subject;
+import org.apache.shiro.web.util.WebUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -13,9 +15,11 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.sinoiov.common.constant.Constants;
 import com.sinoiov.common.domain.Result;
 import com.sinoiov.common.utils.StringUtils;
 import com.sinoiov.common.utils.security.ShiroUtils;
+import com.sinoiov.framework.shiro.SinoiovToken;
 import com.sinoiov.framework.sso.service.ISSOTokenService;
 import com.sinoiov.project.system.user.domain.User;
 import com.sinoiov.project.system.user.service.IUserService;
@@ -42,15 +46,15 @@ public class SsoServerController {
 	
 	@ApiOperation("登陆")
 	@RequestMapping(value="/login",method= {RequestMethod.POST})
-    public Result<User> login(@RequestBody UsernamePasswordToken token,HttpServletResponse response)
+    public Result<User> login(@RequestBody SinoiovToken token,HttpServletRequest request,HttpServletResponse response)
     {
-//        UsernamePasswordToken token = new UsernamePasswordToken(username, password);
+		token.setToken(WebUtils.toHttp(request).getHeader(Constants.SSO_AUTHORIZATION_TOKEN));
         Subject subject = SecurityUtils.getSubject();
         try
         {
             subject.login(token);
             User user = ShiroUtils.getSysUser();
-            response.addHeader("token", user.getToken());
+            response.addHeader(Constants.SSO_AUTHORIZATION_TOKEN, user.getToken());
             return ResultUtils.WrapSuccess(user);
         }
         catch (AuthenticationException e)

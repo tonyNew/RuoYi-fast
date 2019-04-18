@@ -61,4 +61,7 @@ public class Constants
      * 排序的方向 "desc" 或者 "asc".
      */
     public static String IS_ASC = "isAsc";
+    
+    /**SSOToken header字段*/
+    public static String SSO_AUTHORIZATION_TOKEN="token";
 }

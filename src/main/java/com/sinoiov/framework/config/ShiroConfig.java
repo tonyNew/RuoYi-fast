@@ -8,7 +8,6 @@ import javax.servlet.Filter;
 import org.apache.shiro.cache.ehcache.EhCacheManager;
 import org.apache.shiro.codec.Base64;
 import org.apache.shiro.mgt.SecurityManager;
-import org.apache.shiro.session.mgt.SessionManager;
 import org.apache.shiro.spring.security.interceptor.AuthorizationAttributeSourceAdvisor;
 import org.apache.shiro.spring.web.ShiroFilterFactoryBean;
 import org.apache.shiro.web.mgt.CookieRememberMeManager;
@@ -20,8 +19,9 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 import com.sinoiov.common.utils.StringUtils;
-import com.sinoiov.framework.shiro.SSOTokenSessionManager;
+import com.sinoiov.framework.shiro.realm.SinoiovTokenRealm;
 import com.sinoiov.framework.shiro.realm.UserRealm;
+import com.sinoiov.framework.shiro.web.filter.CheckTokenFilter;
 import com.sinoiov.framework.shiro.web.filter.LogoutFilter;
 import com.sinoiov.framework.shiro.web.filter.captcha.CaptchaValidateFilter;
 import com.sinoiov.framework.shiro.web.session.SpringSessionValidationScheduler;
@@ -101,12 +101,22 @@ public class ShiroConfig
     /**
      * 自定义Realm
      */
+//    @Bean
+//    public UserRealm userRealm(EhCacheManager cacheManager)
+//    {
+//        UserRealm userRealm = new UserRealm();
+//        userRealm.setCacheManager(cacheManager);
+//        return userRealm;
+//    }
+    /**
+     * 自定义Realm
+     */
     @Bean
-    public UserRealm userRealm(EhCacheManager cacheManager)
+    public SinoiovTokenRealm sinoiovTokenRealm(EhCacheManager cacheManager)
     {
-        UserRealm userRealm = new UserRealm();
-        userRealm.setCacheManager(cacheManager);
-        return userRealm;
+    	SinoiovTokenRealm userRealm = new SinoiovTokenRealm();
+    	userRealm.setCacheManager(cacheManager);
+    	return userRealm;
     }
 
     /**
@@ -128,7 +138,7 @@ public class ShiroConfig
      * 安全管理器
      */
     @Bean
-    public SecurityManager securityManager(UserRealm userRealm)
+    public SecurityManager securityManager(SinoiovTokenRealm userRealm)
     {
         DefaultWebSecurityManager securityManager = new DefaultWebSecurityManager();
         // 设置realm.
@@ -190,10 +200,11 @@ public class ShiroConfig
         filters.put("captchaValidate", captchaValidateFilter());
         // 注销成功，则跳转到指定页面
         filters.put("logout", logoutFilter());
+        filters.put("ssoToken", new CheckTokenFilter());
         shiroFilterFactoryBean.setFilters(filters);
 
         // 所有请求需要认证
-//        filterChainDefinitionMap.put("/**", "user");
+        filterChainDefinitionMap.put("/**", "ssoToken,user");
         shiroFilterFactoryBean.setFilterChainDefinitionMap(filterChainDefinitionMap);
 
         return shiroFilterFactoryBean;

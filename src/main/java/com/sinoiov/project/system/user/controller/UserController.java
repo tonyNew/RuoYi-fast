@@ -24,6 +24,7 @@ import com.sinoiov.framework.aspectj.lang.enums.BusinessType;
 import com.sinoiov.framework.web.controller.BaseController;
 import com.sinoiov.framework.web.domain.AjaxResult;
 import com.sinoiov.framework.web.page.TableDataInfo;
+import com.sinoiov.project.system.role.domain.Role;
 import com.sinoiov.project.system.role.service.IRoleService;
 import com.sinoiov.project.system.user.domain.User;
 import com.sinoiov.project.system.user.service.IUserService;
@@ -103,6 +104,8 @@ public class UserController extends BaseController
     public Result<User> detail(long id)
     {
     	User user = userService.selectUserById(id);
+    	List<Role> role = roleService.selectRolesByUserId(id);
+    	user.setRoles(role);
     	return ResultUtils.WrapSuccess(user);
     }
 
@@ -111,7 +114,7 @@ public class UserController extends BaseController
      */
 //    @RequiresPermissions("system:user:edit")
     @Log(title = "用户管理", businessType = BusinessType.UPDATE)
-    @PostMapping("/edit")
+    @PostMapping("/update")
     @Transactional(rollbackFor = Exception.class)
     @ResponseBody
     public AjaxResult editSave(User user)

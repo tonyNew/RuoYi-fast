@@ -213,7 +213,8 @@ public class UserServiceImpl implements IUserService
     {
         // 新增用户与角色管理
         List<UserRole> list = new ArrayList<UserRole>();
-        for (Long roleId : user.getRoleIds())
+        Long[] roleIds = Convert.toLongArray( user.getRoleIds());
+        for (Long roleId :roleIds)
         {
             UserRole ur = new UserRole();
             ur.setUserId(user.getUserId());

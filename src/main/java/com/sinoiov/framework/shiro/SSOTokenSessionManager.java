@@ -11,6 +11,7 @@ import org.apache.shiro.web.servlet.ShiroHttpServletRequest;
 import org.apache.shiro.web.session.mgt.DefaultWebSessionManager;
 import org.apache.shiro.web.util.WebUtils;
 
+import com.sinoiov.common.constant.Constants;
 import com.sinoiov.utils.StringUtils;
 
 /**
@@ -19,7 +20,7 @@ import com.sinoiov.utils.StringUtils;
  * 描    述：
 */
 public class SSOTokenSessionManager  extends DefaultWebSessionManager {
-    private static final String AUTHORIZATION = "token";
+    private static final String AUTHORIZATION = Constants.SSO_AUTHORIZATION_TOKEN;
     private static final String REFERENCED_SESSION_ID_SOURCE = "Stateless request";
 
 
