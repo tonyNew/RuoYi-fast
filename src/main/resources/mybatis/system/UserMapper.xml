@@ -25,6 +25,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<result property="updateBy" column="update_by" />
 		<result property="updateTime" column="update_time" />
 		<result property="remark" column="remark" />
+		<result property="token" column="token" />
 		<collection property="roles" javaType="java.util.List"
 			resultMap="RoleResult" />
 	</resultMap>
@@ -43,7 +44,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		u.phonenumber, u.sex, u.avatar, u.password, u.salt, u.status,
 		u.del_flag, u.login_ip, u.login_date, u.create_time, u.remark,
 		r.role_id, r.role_name, r.role_key, r.role_sort, r.data_scope, r.status as
-		role_status
+		role_status,u.token
 		from sys_user u
 		left join sys_user_role ur on u.user_id = ur.user_id
 		left join sys_role r on r.role_id = ur.role_id

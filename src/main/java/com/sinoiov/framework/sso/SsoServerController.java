@@ -1,12 +1,13 @@
 package com.sinoiov.framework.sso;
 
-import java.util.Objects;
+import javax.servlet.http.HttpServletResponse;
 
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.AuthenticationException;
 import org.apache.shiro.authc.UsernamePasswordToken;
 import org.apache.shiro.subject.Subject;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -41,16 +42,16 @@ public class SsoServerController {
 	
 	@ApiOperation("登陆")
 	@RequestMapping(value="/login",method= {RequestMethod.POST})
-    public Result<String> login(String username, String password)
+    public Result<User> login(@RequestBody UsernamePasswordToken token,HttpServletResponse response)
     {
-        UsernamePasswordToken token = new UsernamePasswordToken(username, password);
+//        UsernamePasswordToken token = new UsernamePasswordToken(username, password);
         Subject subject = SecurityUtils.getSubject();
         try
         {
             subject.login(token);
             User user = ShiroUtils.getSysUser();
-            String ssoToken = sSOTokenService.selectTokenByUser(user.getLoginName());
-            return ResultUtils.WrapSuccess(ssoToken);
+            response.addHeader("token", user.getToken());
+            return ResultUtils.WrapSuccess(user);
         }
         catch (AuthenticationException e)
         {
@@ -59,7 +60,7 @@ public class SsoServerController {
             {
                 msg = e.getMessage();
             }
-            return ResultUtils.WrapSuccess(msg);
+            return ResultUtils.WrapError(msg);
         }
     }
 	@ApiOperation("校验")

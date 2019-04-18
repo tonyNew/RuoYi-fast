@@ -18,10 +18,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		insert into as_subsystem(
  			<if test="name != null and name != ''">`name`,</if>
  			<if test="url != null and url != ''">url,</if>
- 			<if test="desc != null and desc != ''">desc,</if>
+ 			<if test="desc != null and desc != ''">`desc`,</if>
  			<if test="img != null and img != ''">img,</if>
  			<if test="createBy != null and createBy != ''">create_by,</if>
  			<if test="remark != null and remark != ''">remark,</if>
+ 			visible,
  			create_time
  		)values(
  			<if test="name != null and name != ''">#{name},</if>
@@ -30,6 +31,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
  			<if test="img != null and img != ''">#{img},</if>
  			<if test="createBy != null and createBy != ''">#{createBy},</if>
  			<if test="remark != null and remark != ''">#{remark},</if>
+ 			#{visible},
  			sysdate()
  		)
 	</insert>
@@ -38,10 +40,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
  		<set>
  			<if test="name != null and name != ''">`name`=#{name},</if>
  			<if test="url != null and url != ''">url=#{url},</if>
- 			<if test="desc != null and desc != ''">desc=#{desc},</if>
+ 			<if test="desc != null and desc != ''">`desc`=#{desc},</if>
  			<if test="img != null and img != ''">img = #{img},</if>
  			<if test="updateBy != null and updateBy != ''">update_by = #{updateBy},</if>
  			<if test="remark != null and remark != ''">remark = #{remark},</if>
+ 			visible=#{visible},
  			update_time = sysdate()
  		</set>
  		where id = #{id}

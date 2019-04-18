@@ -9,6 +9,7 @@ import org.apache.shiro.subject.Subject;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.sinoiov.common.utils.ServletUtils;
@@ -38,9 +39,9 @@ public class LoginController extends BaseController
 
     @PostMapping("/login")
     @ResponseBody
-    public AjaxResult ajaxLogin(String username, String password, Boolean rememberMe)
+    public AjaxResult ajaxLogin(UsernamePasswordToken token)
     {
-        UsernamePasswordToken token = new UsernamePasswordToken(username, password, rememberMe);
+//        UsernamePasswordToken token = new UsernamePasswordToken(username, password);
         Subject subject = SecurityUtils.getSubject();
         try
         {
@@ -49,6 +50,7 @@ public class LoginController extends BaseController
         }
         catch (AuthenticationException e)
         {
+        	e.printStackTrace();
             String msg = "用户或密码错误";
             if (StringUtils.isNotEmpty(e.getMessage()))
             {

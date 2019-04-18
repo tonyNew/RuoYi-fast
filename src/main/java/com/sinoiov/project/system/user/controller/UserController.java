@@ -12,9 +12,13 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.RestController;
 
+import com.mysql.jdbc.util.ResultSetUtil;
+import com.sinoiov.common.domain.Result;
 import com.sinoiov.common.utils.StringUtils;
 import com.sinoiov.common.utils.poi.ExcelUtil;
+import com.sinoiov.common.utils.security.ShiroUtils;
 import com.sinoiov.framework.aspectj.lang.annotation.Log;
 import com.sinoiov.framework.aspectj.lang.enums.BusinessType;
 import com.sinoiov.framework.web.controller.BaseController;
@@ -23,6 +27,7 @@ import com.sinoiov.framework.web.page.TableDataInfo;
 import com.sinoiov.project.system.role.service.IRoleService;
 import com.sinoiov.project.system.user.domain.User;
 import com.sinoiov.project.system.user.service.IUserService;
+import com.sinoiov.utils.ResultUtils;
 
 import io.swagger.annotations.Api;
 
@@ -32,7 +37,7 @@ import io.swagger.annotations.Api;
  * @author tony
  */
 @Api(description="用户管理")
-@Controller
+@RestController
 @RequestMapping("/system/user")
 public class UserController extends BaseController
 {
@@ -44,21 +49,13 @@ public class UserController extends BaseController
     @Autowired
     private IRoleService roleService;
 
-    @RequiresPermissions("system:user:view")
-    @GetMapping()
-    public String user()
-    {
-        return prefix + "/user";
-    }
-
-    @RequiresPermissions("system:user:list")
-    @PostMapping("/list")
-    @ResponseBody
-    public TableDataInfo list(User user)
+//    @RequiresPermissions("system:user:list")
+    @GetMapping("/list")
+    public Result<TableDataInfo> list(User user)
     {
         startPage();
         List<User> list = userService.selectUserList(user);
-        return getDataTable(list);
+        return ResultUtils.WrapSuccess(getDataTable(list));
     }
 
     @Log(title = "用户管理", businessType = BusinessType.EXPORT)
@@ -85,11 +82,10 @@ public class UserController extends BaseController
     /**
      * 新增保存用户
      */
-    @RequiresPermissions("system:user:add")
+//    @RequiresPermissions("system:user:add")
     @Log(title = "用户管理", businessType = BusinessType.INSERT)
     @PostMapping("/add")
     @Transactional(rollbackFor = Exception.class)
-    @ResponseBody
     public AjaxResult addSave(User user)
     {
         if (StringUtils.isNotNull(user.getUserId()) && User.isAdmin(user.getUserId()))
@@ -99,21 +95,21 @@ public class UserController extends BaseController
         return toAjax(userService.insertUser(user));
     }
 
+    
     /**
      * 修改用户
      */
-    @GetMapping("/edit/{userId}")
-    public String edit(@PathVariable("userId") Long userId, ModelMap mmap)
+    @GetMapping("/detail")
+    public Result<User> detail(long id)
     {
-        mmap.put("user", userService.selectUserById(userId));
-        mmap.put("roles", roleService.selectRolesByUserId(userId));
-        return prefix + "/edit";
+    	User user = userService.selectUserById(id);
+    	return ResultUtils.WrapSuccess(user);
     }
 
     /**
      * 修改保存用户
      */
-    @RequiresPermissions("system:user:edit")
+//    @RequiresPermissions("system:user:edit")
     @Log(title = "用户管理", businessType = BusinessType.UPDATE)
     @PostMapping("/edit")
     @Transactional(rollbackFor = Exception.class)
@@ -127,7 +123,7 @@ public class UserController extends BaseController
         return toAjax(userService.updateUser(user));
     }
 
-    @RequiresPermissions("system:user:resetPwd")
+//    @RequiresPermissions("system:user:resetPwd")
     @Log(title = "重置密码", businessType = BusinessType.UPDATE)
     @GetMapping("/resetPwd/{userId}")
     public String resetPwd(@PathVariable("userId") Long userId, ModelMap mmap)
@@ -136,7 +132,7 @@ public class UserController extends BaseController
         return prefix + "/resetPwd";
     }
 
-    @RequiresPermissions("system:user:resetPwd")
+//    @RequiresPermissions("system:user:resetPwd")
     @Log(title = "重置密码", businessType = BusinessType.UPDATE)
     @PostMapping("/resetPwd")
     @ResponseBody
@@ -145,11 +141,10 @@ public class UserController extends BaseController
         return toAjax(userService.resetUserPwd(user));
     }
 
-    @RequiresPermissions("system:user:remove")
+//    @RequiresPermissions("system:user:remove")
     @Log(title = "用户管理", businessType = BusinessType.DELETE)
-    @PostMapping("/remove")
-    @ResponseBody
-    public AjaxResult remove(String ids)
+    @PostMapping("/del")
+    public AjaxResult del(String ids)
     {
         try
         {
