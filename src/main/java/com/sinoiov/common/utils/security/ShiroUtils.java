@@ -3,16 +3,14 @@ package com.sinoiov.common.utils.security;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.mgt.RealmSecurityManager;
 import org.apache.shiro.session.Session;
+import org.apache.shiro.subject.PrincipalCollection;
+import org.apache.shiro.subject.SimplePrincipalCollection;
 import org.apache.shiro.subject.Subject;
 
 import com.sinoiov.common.utils.StringUtils;
 import com.sinoiov.common.utils.bean.BeanUtils;
 import com.sinoiov.framework.shiro.realm.UserRealm;
 import com.sinoiov.project.system.user.domain.User;
-
-import org.apache.shiro.subject.PrincipalCollection;
-import org.apache.shiro.subject.SimplePrincipalCollection;
-
 /**
  * shiro 工具类
  * 
@@ -83,4 +81,5 @@ public class ShiroUtils
     {
         return String.valueOf(getSubjct().getSession().getId());
     }
+    
 }

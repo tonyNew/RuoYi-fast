@@ -20,7 +20,7 @@ public class LdapLoginService extends LoginService {
 	
 	@Override
 	boolean validatePassword(User user, String password) {
-		return ldapDao.validatePassword(user, password);
+		return ldapDao.checkUser(user, password);
 	}
 
 }

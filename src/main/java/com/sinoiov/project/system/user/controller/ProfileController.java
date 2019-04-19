@@ -69,13 +69,6 @@ public class ProfileController extends BaseController
         return false;
     }
 
-    @GetMapping("/resetPwd/{userId}")
-    public String resetPwd(@PathVariable("userId") Long userId, ModelMap mmap)
-    {
-        mmap.put("user", userService.selectUserById(userId));
-        return prefix + "/resetPwd";
-    }
-
     @Log(title = "重置密码", businessType = BusinessType.UPDATE)
     @PostMapping("/resetPwd")
     @ResponseBody
