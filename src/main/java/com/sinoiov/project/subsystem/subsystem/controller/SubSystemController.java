@@ -1,6 +1,7 @@
 package com.sinoiov.project.subsystem.subsystem.controller;
 
 import java.util.Date;
+import java.util.List;
 
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -55,13 +56,22 @@ public class SubSystemController  extends AbstractController<ISubSystemService, 
 		return ResultUtils.WrapSuccess(success);
 	}
 	
-    @Log(title = "子系统-删除", businessType = BusinessType.UPDATE)
+    @Log(title = "子系统-删除", businessType = BusinessType.DELETE)
     @Transactional
 	@ApiOperation("删除")
-	@RequestMapping(value="/del",method= {RequestMethod.DELETE})
+	@RequestMapping(value="/del",method= {RequestMethod.POST})
 	public Result<Boolean> delById(long id) {
 		boolean success = service.delById(id);
 		return ResultUtils.WrapSuccess(success);
+	}
+    
+
+	@ApiOperation("用户展示")
+	@RequestMapping(value="/index",method= {RequestMethod.GET})
+	public Result<List<SubSystem>> index() {
+		SubSystem domain=new SubSystem();
+		domain.setVisible(0);
+		return ResultUtils.WrapSuccess(service.list(domain));
 	}
     
     

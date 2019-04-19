@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.sinoiov.common.domain.Result;
+import com.sinoiov.common.utils.TreeUtils;
 import com.sinoiov.framework.aspectj.lang.annotation.Log;
 import com.sinoiov.framework.aspectj.lang.enums.BusinessType;
 import com.sinoiov.framework.web.controller.BaseController;
@@ -46,7 +47,8 @@ public class MenuController extends BaseController
     public Result<List<Menu>>  list(Menu menu)
     {
         List<Menu> menuList = menuService.selectMenuList(menu);
-        return ResultUtils.WrapSuccess(menuList);
+        List<Menu> childPerms = TreeUtils.getChildPerms(menuList, 0);
+        return ResultUtils.WrapSuccess(childPerms);
     }
 
     /**

@@ -104,7 +104,7 @@ public class DictTypeServiceImpl implements IDictTypeService
     @Override
     public int insertDictType(DictType dictType)
     {
-        dictType.setCreateBy(ShiroUtils.getLoginName());
+        dictType.setCreateBy(ShiroUtils.getUserId());
         return dictTypeMapper.insertDictType(dictType);
     }
 
@@ -117,7 +117,7 @@ public class DictTypeServiceImpl implements IDictTypeService
     @Override
     public int updateDictType(DictType dictType)
     {
-        dictType.setUpdateBy(ShiroUtils.getLoginName());
+        dictType.setUpdateBy(ShiroUtils.getUserId());
         DictType oldDict = dictTypeMapper.selectDictTypeById(dictType.getDictId());
         dictDataMapper.updateDictDataType(oldDict.getDictType(), dictType.getDictType());
         return dictTypeMapper.updateDictType(dictType);

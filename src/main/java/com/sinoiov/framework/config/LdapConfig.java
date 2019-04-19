@@ -9,7 +9,7 @@ import org.springframework.ldap.core.support.LdapContextSource;
 /**
  * 作 者： niuyi@sinoiov.com 创建于：2019年4月18日 描 述：
  */
-@Configuration
+//@Configuration
 public class LdapConfig {
 	@Value("${ldap.url}")
 	private String ldapUrl;

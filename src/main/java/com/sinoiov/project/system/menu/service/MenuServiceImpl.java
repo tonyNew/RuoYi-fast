@@ -264,7 +264,7 @@ public class MenuServiceImpl implements IMenuService
     @Override
     public int insertMenu(Menu menu)
     {
-        menu.setCreateBy(ShiroUtils.getLoginName());
+        menu.setCreateBy(ShiroUtils.getUserId());
         ShiroUtils.clearCachedAuthorizationInfo();
         return menuMapper.insertMenu(menu);
     }
@@ -278,7 +278,7 @@ public class MenuServiceImpl implements IMenuService
     @Override
     public int updateMenu(Menu menu)
     {
-        menu.setUpdateBy(ShiroUtils.getLoginName());
+        menu.setUpdateBy(ShiroUtils.getUserId());
         ShiroUtils.clearCachedAuthorizationInfo();
         return menuMapper.updateMenu(menu);
     }

@@ -18,6 +18,9 @@ public class Application
     {
         // System.setProperty("spring.devtools.restart.enabled", "false");
         SpringApplication.run(Application.class, args);
-        System.out.println("启动成功");
+        System.out.println(",---.|,   .,---.|,---..    ,    |--.--    ,---.,---.,   .--.--,---.,---.\r\n" + 
+        		"`---.||\\  ||   |||   ||    |    |  |      |    |--- |\\  |  |  |--- |---'\r\n" + 
+        		"    ||| \\ ||   |||   | \\  /     |  |      |    |    | \\ |  |  |    |  \\ \r\n" + 
+        		"`---'``  `'`---'``---'  `'      `  `      `---'`---'`  `'  `  `---'`   `\r\n启动成功");
     }
 }

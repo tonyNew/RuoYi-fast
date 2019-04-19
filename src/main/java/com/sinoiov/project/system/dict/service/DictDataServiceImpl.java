@@ -102,7 +102,7 @@ public class DictDataServiceImpl implements IDictDataService
     @Override
     public int insertDictData(DictData dictData)
     {
-        dictData.setCreateBy(ShiroUtils.getLoginName());
+        dictData.setCreateBy(ShiroUtils.getUserId());
         return dictDataMapper.insertDictData(dictData);
     }
 
@@ -115,7 +115,7 @@ public class DictDataServiceImpl implements IDictDataService
     @Override
     public int updateDictData(DictData dictData)
     {
-        dictData.setUpdateBy(ShiroUtils.getLoginName());
+        dictData.setUpdateBy(ShiroUtils.getUserId());
         return dictDataMapper.updateDictData(dictData);
     }
 }

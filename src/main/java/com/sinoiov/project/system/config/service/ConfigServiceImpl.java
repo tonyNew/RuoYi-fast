@@ -72,7 +72,7 @@ public class ConfigServiceImpl implements IConfigService
     @Override
     public int insertConfig(Config config)
     {
-        config.setCreateBy(ShiroUtils.getLoginName());
+        config.setCreateBy(ShiroUtils.getUserId());
         return configMapper.insertConfig(config);
     }
 
@@ -85,7 +85,7 @@ public class ConfigServiceImpl implements IConfigService
     @Override
     public int updateConfig(Config config)
     {
-        config.setUpdateBy(ShiroUtils.getLoginName());
+        config.setUpdateBy(ShiroUtils.getUserId());
         return configMapper.updateConfig(config);
     }
 

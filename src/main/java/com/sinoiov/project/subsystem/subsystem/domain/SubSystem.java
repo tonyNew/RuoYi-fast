@@ -13,7 +13,7 @@ public class SubSystem extends BaseEntity {
 	private String url;
 	private String desc;
 	private String img;
-	private int visible;
+	private Integer visible;
 
 	public String getName() {
 		return name;
@@ -39,10 +39,10 @@ public class SubSystem extends BaseEntity {
 	public void setImg(String img) {
 		this.img = img;
 	}
-	public int getVisible() {
+	public Integer getVisible() {
 		return visible;
 	}
-	public void setVisible(int visible) {
+	public void setVisible(Integer visible) {
 		this.visible = visible;
 	}
 	

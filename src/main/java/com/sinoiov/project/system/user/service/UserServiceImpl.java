@@ -151,7 +151,7 @@ public class UserServiceImpl implements IUserService
     	ldapDao.addUser(user);
         user.randomSalt();
         user.setPassword(passwordService.encryptPassword(user.getLoginName(), user.getPassword(), user.getSalt()));
-        user.setCreateBy(ShiroUtils.getLoginName());
+        user.setCreateBy(ShiroUtils.getUserId());
         // 新增用户信息
         int rows = userMapper.insertUser(user);
         // 新增用户与角色管理
@@ -169,7 +169,7 @@ public class UserServiceImpl implements IUserService
     public int updateUser(User user)
     {
         Long userId = user.getUserId();
-        user.setUpdateBy(ShiroUtils.getLoginName());
+        user.setUpdateBy(ShiroUtils.getUserId());
         ldapDao.updateUser(user);
         // 删除用户与角色关联
         userRoleMapper.deleteUserRoleByUserId(userId);

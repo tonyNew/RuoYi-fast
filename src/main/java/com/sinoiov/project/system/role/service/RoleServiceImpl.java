@@ -165,7 +165,7 @@ public class RoleServiceImpl implements IRoleService
     @Override
     public int insertRole(Role role)
     {
-        role.setCreateBy(ShiroUtils.getLoginName());
+        role.setCreateBy(ShiroUtils.getUserId());
         // 新增角色信息
         roleMapper.insertRole(role);
         ShiroUtils.clearCachedAuthorizationInfo();
@@ -181,7 +181,7 @@ public class RoleServiceImpl implements IRoleService
     @Override
     public int updateRole(Role role)
     {
-        role.setUpdateBy(ShiroUtils.getLoginName());
+        role.setUpdateBy(ShiroUtils.getUserId());
         // 修改角色信息
         roleMapper.updateRole(role);
         ShiroUtils.clearCachedAuthorizationInfo();
@@ -199,7 +199,7 @@ public class RoleServiceImpl implements IRoleService
     @Override
     public int updateRule(Role role)
     {
-        role.setUpdateBy(ShiroUtils.getLoginName());
+        role.setUpdateBy(ShiroUtils.getUserId());
         // 修改角色信息
         roleMapper.updateRole(role);
         // 删除角色与部门关联
