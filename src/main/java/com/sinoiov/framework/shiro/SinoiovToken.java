@@ -21,4 +21,7 @@ public class SinoiovToken  extends org.apache.shiro.authc.UsernamePasswordToken{
 		this.token = token;
 	}
 	
+	public SinoiovToken(String token) {
+		this.token = token;
+	}
 }

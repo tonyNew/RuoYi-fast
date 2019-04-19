@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.sinoiov.common.constant.Constants;
 import com.sinoiov.common.domain.Result;
+import com.sinoiov.common.utils.JWTUtils;
 import com.sinoiov.common.utils.StringUtils;
 import com.sinoiov.common.utils.security.ShiroUtils;
 import com.sinoiov.framework.shiro.SinoiovToken;
@@ -70,10 +71,9 @@ public class SsoServerController {
 	@ApiOperation("校验")
 	@RequestMapping(value="/check",method= {RequestMethod.GET,RequestMethod.POST})
 	public Result<String> check(@RequestParam String token) {
-		User user = sSOTokenService.selectUserByToken(token);
-		if(user==null) {
-			return ResultUtils.WrapError("token失效");
-		}
-		return ResultUtils.WrapSuccess(user.getLoginName());
+		String username = JWTUtils.getLoginName(token);
+		sSOTokenService.checkToken(token);
+//		User user = sSOTokenService.selectUserByToken(token);
+		return ResultUtils.WrapSuccess(username);
 	}
 }

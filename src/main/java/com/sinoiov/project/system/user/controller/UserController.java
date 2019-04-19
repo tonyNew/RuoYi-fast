@@ -10,6 +10,7 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
@@ -87,7 +88,7 @@ public class UserController extends BaseController
     @Log(title = "用户管理", businessType = BusinessType.INSERT)
     @PostMapping("/add")
     @Transactional(rollbackFor = Exception.class)
-    public AjaxResult addSave(User user)
+    public AjaxResult addSave(@RequestBody User user)
     {
         if (StringUtils.isNotNull(user.getUserId()) && User.isAdmin(user.getUserId()))
         {
@@ -117,7 +118,7 @@ public class UserController extends BaseController
     @PostMapping("/update")
     @Transactional(rollbackFor = Exception.class)
     @ResponseBody
-    public AjaxResult editSave(User user)
+    public AjaxResult editSave(@RequestBody User user)
     {
         if (StringUtils.isNotNull(user.getUserId()) && User.isAdmin(user.getUserId()))
         {

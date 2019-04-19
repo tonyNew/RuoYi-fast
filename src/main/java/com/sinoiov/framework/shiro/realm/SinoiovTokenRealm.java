@@ -38,7 +38,7 @@ public class SinoiovTokenRealm extends UserRealm {
 			if (user == null) {
 				throw new AuthenticationException("token" + upToken.getToken() + "校验不通过");
 			}
-			return new SimpleAuthenticationInfo(user, user.getUserName(), getName());
+			return new SimpleAuthenticationInfo(user, user, getName());
 		}
 		return super.doGetAuthenticationInfo(token);
 	}

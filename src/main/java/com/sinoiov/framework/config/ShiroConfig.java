@@ -20,8 +20,7 @@ import org.springframework.context.annotation.Configuration;
 
 import com.sinoiov.common.utils.StringUtils;
 import com.sinoiov.framework.shiro.realm.SinoiovTokenRealm;
-import com.sinoiov.framework.shiro.realm.UserRealm;
-import com.sinoiov.framework.shiro.web.filter.CheckTokenFilter;
+import com.sinoiov.framework.shiro.web.filter.JWTAuthFilter;
 import com.sinoiov.framework.shiro.web.filter.LogoutFilter;
 import com.sinoiov.framework.shiro.web.filter.captcha.CaptchaValidateFilter;
 import com.sinoiov.framework.shiro.web.session.SpringSessionValidationScheduler;
@@ -176,7 +175,7 @@ public class ShiroConfig
         // Shiro连接约束配置，即过滤链的定义
         LinkedHashMap<String, String> filterChainDefinitionMap = new LinkedHashMap<>();
         // 对静态资源设置匿名访问
-//        filterChainDefinitionMap.put("/swagger-ui**","anon");
+        filterChainDefinitionMap.put("/swagger-ui**","anon");
         filterChainDefinitionMap.put("/favicon.ico**", "anon");
         filterChainDefinitionMap.put("/ruoyi.png**", "anon");
         filterChainDefinitionMap.put("/css/**", "anon");
@@ -200,7 +199,8 @@ public class ShiroConfig
         filters.put("captchaValidate", captchaValidateFilter());
         // 注销成功，则跳转到指定页面
         filters.put("logout", logoutFilter());
-        filters.put("ssoToken", new CheckTokenFilter());
+//        filters.put("ssoToken", new CheckTokenFilter());
+        filters.put("ssoToken", new JWTAuthFilter());
         shiroFilterFactoryBean.setFilters(filters);
 
         // 所有请求需要认证

@@ -306,5 +306,5 @@ public class UserServiceImpl implements IUserService
 	public User selectUserByLoginToken(String token) {
 		return userMapper.selectUserByLoginToken(token);
 	}
-    
+	
 }

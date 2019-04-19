@@ -27,6 +27,7 @@ import com.sinoiov.project.system.user.domain.User;
  * 创建于：2019年4月18日
  * 描    述：
 */
+@Deprecated
 public class CheckTokenFilter extends org.apache.shiro.web.filter.authc.LogoutFilter {
     private static final Logger log = LoggerFactory.getLogger(CheckTokenFilter.class);
     

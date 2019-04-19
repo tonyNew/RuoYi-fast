@@ -64,4 +64,14 @@ public class Constants
     
     /**SSOToken header字段*/
     public static String SSO_AUTHORIZATION_TOKEN="token";
+    
+    /**redis用户前缀*/
+    public static final String USER_PRE="SINOIOVO_%s";
+    
+    /**redis用户前缀*/
+    public static final int EXPIRED_TIME=30;
+    
+    /**token更新时间*/
+    public static final int TOKEN_REFRESH_INTERVAL_SECONDS=5*60;
+    
 }

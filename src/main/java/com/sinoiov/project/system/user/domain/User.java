@@ -7,6 +7,7 @@ import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
 import org.apache.shiro.crypto.SecureRandomNumberGenerator;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.sinoiov.framework.aspectj.lang.annotation.Excel;
 import com.sinoiov.framework.web.domain.BaseEntity;
 import com.sinoiov.project.system.role.domain.Role;
@@ -16,6 +17,7 @@ import com.sinoiov.project.system.role.domain.Role;
  * 
  * @author tony
  */
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class User extends BaseEntity
 {
     private static final long serialVersionUID = 1L;

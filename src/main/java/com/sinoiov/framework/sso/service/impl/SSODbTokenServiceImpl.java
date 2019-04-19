@@ -5,6 +5,7 @@ import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.stereotype.Service;
 
+import com.sinoiov.common.utils.JWTUtils;
 import com.sinoiov.common.utils.RandomUtils;
 import com.sinoiov.framework.sso.service.ISSOTokenService;
 import com.sinoiov.project.system.user.domain.User;
@@ -16,15 +17,16 @@ import com.sinoiov.utils.StringUtils;
  * 创建于：2019年4月16日
  * 描    述：
 */
-@Service
-public class SSOTokenServiceImpl implements ISSOTokenService {
+//@Service
+@Deprecated
+public class SSODbTokenServiceImpl implements ISSOTokenService {
 	@Autowired
 	UserMapper userMapper;
 
 	@Override
 	public void saveToken(User user) {
 		if(StringUtils.isNull(user.getToken())) {
-			user.setToken(RandomUtils.gen());
+			user.setToken(JWTUtils.sign(user));
 		}
 		userMapper.updateUser(user);
 		
@@ -37,7 +39,8 @@ public class SSOTokenServiceImpl implements ISSOTokenService {
 
 	@Override
 	public User selectUserByToken(String token) {
-		User user = userMapper.selectUserByLoginToken(token);
+		String username = JWTUtils.getLoginName(token);
+		User user = userMapper.selectUserByLoginName(username);
 		return user;
 	}
 
@@ -47,6 +50,12 @@ public class SSOTokenServiceImpl implements ISSOTokenService {
 		if(user!=null) {
 			return user.getToken();
 		}
+		return null;
+	}
+
+	@Override
+	public User checkToken(String token) {
+		// TODO Auto-generated method stub
 		return null;
 	}
 

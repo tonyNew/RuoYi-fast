@@ -1,14 +1,13 @@
 package com.sinoiov.project.system.role.controller;
 
 import java.util.List;
+
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
@@ -70,7 +69,7 @@ public class RoleController extends BaseController
     @Log(title = "角色管理", businessType = BusinessType.INSERT)
     @PostMapping("/add")
     @Transactional(rollbackFor = Exception.class)
-    public AjaxResult addSave(Role role)
+    public AjaxResult addSave(@RequestBody Role role)
     {
         return toAjax(roleService.insertRole(role));
 
@@ -84,7 +83,7 @@ public class RoleController extends BaseController
     @Log(title = "角色管理", businessType = BusinessType.UPDATE)
     @PostMapping("/update")
     @Transactional(rollbackFor = Exception.class)
-    public AjaxResult editSave(Role role)
+    public AjaxResult editSave(@RequestBody Role role)
     {
         return toAjax(roleService.updateRole(role));
     }
@@ -96,7 +95,7 @@ public class RoleController extends BaseController
     @Log(title = "角色管理", businessType = BusinessType.UPDATE)
     @PostMapping("/rule")
     @Transactional(rollbackFor = Exception.class)
-    public AjaxResult ruleSave(Role role)
+    public AjaxResult ruleSave(@RequestBody Role role)
     {
         return toAjax(roleService.updateRule(role));
     }

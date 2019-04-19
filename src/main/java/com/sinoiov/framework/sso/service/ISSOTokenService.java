@@ -1,5 +1,6 @@
 package com.sinoiov.framework.sso.service;
 
+import com.sinoiov.common.constant.Constants;
 import com.sinoiov.project.system.user.domain.User;
 
 /**
@@ -9,6 +10,8 @@ import com.sinoiov.project.system.user.domain.User;
 */
 public interface ISSOTokenService {
 	
+	String REDIS_USER_PRE=Constants.USER_PRE;
+	
 	void saveToken(User user);
 	
 	void clearToken(User user);
@@ -16,5 +19,12 @@ public interface ISSOTokenService {
 	User selectUserByToken(String token);
 	
 	String selectTokenByUser(String loginName);
+	
+	User checkToken(String token);
+	
+	
+	default String getKey(String loginName ) {
+		return String.format(REDIS_USER_PRE,loginName);
+	}
 	
 }
