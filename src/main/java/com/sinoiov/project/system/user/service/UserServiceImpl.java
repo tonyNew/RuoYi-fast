@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.sinoiov.common.constant.UserConstants;
+import com.sinoiov.common.exception.base.BaseException;
 import com.sinoiov.common.exception.user.UserNotExistsException;
 import com.sinoiov.common.support.Convert;
 import com.sinoiov.common.utils.StringUtils;
@@ -316,7 +317,7 @@ public class UserServiceImpl implements IUserService
 	 private boolean checkUniq(User user) {
     	int count = userMapper.checkUnique(user);
 		if(count>0) {
-			throw new AuthorizationException("用户重复");
+			throw new BaseException("用户重复");
 		}
 		return true;
 	 }

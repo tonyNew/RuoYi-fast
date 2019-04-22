@@ -110,9 +110,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		resultType="int">
 		select count(1) from sys_user
 		<where>
-			<if test="loginName != null and loginName != ''"> or login_name = #{loginName}</if>
-			<if test="phonenumber != null and phonenumber != ''"> or phonenumber = #{phonenumber}</if>
-			<if test="email != null and email != ''">or email = #{email}</if>
+			<if test="userId != null and userId != ''">
+					and user_id != #{userId}
+			</if>
+			and (login_name = #{loginName}  or phonenumber = #{phonenumber} or email = #{email} )
 		</where>
 	</select>
 

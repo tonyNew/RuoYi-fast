@@ -78,12 +78,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<select id="checkUnique" parameterType="Role" resultType="int">
 		select count(0) from sys_role r
 		<where>
-			<if test="roleKey != null and roleKey != ''">
-					or r.role_key=#{roleKey}
+			<if test="roleId != null and roleId != ''">
+					and r.role_id != #{roleId}
 			</if>
-			<if test="roleName != null and roleName != ''">
-					or r.role_name=#{roleName}
-			</if>
+					and (r.role_key=#{roleKey}  or r.role_name=#{roleName})
 		</where>
 	</select>
 	

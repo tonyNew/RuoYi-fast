@@ -12,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.sinoiov.common.constant.UserConstants;
+import com.sinoiov.common.exception.base.BaseException;
 import com.sinoiov.common.exception.user.RoleBlockedException;
 import com.sinoiov.common.support.Convert;
 import com.sinoiov.common.utils.StringUtils;
@@ -314,7 +315,7 @@ public class RoleServiceImpl implements IRoleService
     private boolean checkUniq(Role role) {
     	int count = roleMapper.checkUnique(role);
 		if(count>0) {
-			throw new AuthorizationException("角色重复");
+			throw new BaseException("角色重复");
 		}
 		return true;
     	
