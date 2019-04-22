@@ -5,10 +5,14 @@ import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+
+import org.apache.shiro.authz.AuthorizationException;
+import org.omg.CORBA.UserException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.sinoiov.common.constant.UserConstants;
+import com.sinoiov.common.exception.user.RoleBlockedException;
 import com.sinoiov.common.support.Convert;
 import com.sinoiov.common.utils.StringUtils;
 import com.sinoiov.common.utils.security.ShiroUtils;
@@ -165,6 +169,7 @@ public class RoleServiceImpl implements IRoleService
     @Override
     public int insertRole(Role role)
     {
+    	checkUniq(role);
         role.setCreateBy(ShiroUtils.getUserId());
         // 新增角色信息
         roleMapper.insertRole(role);
@@ -181,6 +186,7 @@ public class RoleServiceImpl implements IRoleService
     @Override
     public int updateRole(Role role)
     {
+    	checkUniq(role);
         role.setUpdateBy(ShiroUtils.getUserId());
         // 修改角色信息
         roleMapper.updateRole(role);
@@ -302,5 +308,15 @@ public class RoleServiceImpl implements IRoleService
     public int countUserRoleByRoleId(Long roleId)
     {
         return userRoleMapper.countUserRoleByRoleId(roleId);
+    }
+    
+    
+    private boolean checkUniq(Role role) {
+    	int count = roleMapper.checkUnique(role);
+		if(count>0) {
+			throw new AuthorizationException("角色重复");
+		}
+		return true;
+    	
     }
 }

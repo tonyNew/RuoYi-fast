@@ -75,6 +75,17 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<include refid="selectRoleVo"/>
 		 where r.role_name=#{roleName}
 	</select>
+	<select id="checkUnique" parameterType="Role" resultType="int">
+		select count(0) from sys_role r
+		<where>
+			<if test="roleKey != null and roleKey != ''">
+					or r.role_key=#{roleKey}
+			</if>
+			<if test="roleName != null and roleName != ''">
+					or r.role_name=#{roleName}
+			</if>
+		</where>
+	</select>
 	
 	<select id="checkRoleKeyUnique" parameterType="String" resultMap="RoleResult">
 		<include refid="selectRoleVo"/>

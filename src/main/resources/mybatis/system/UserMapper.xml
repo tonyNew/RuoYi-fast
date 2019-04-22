@@ -105,6 +105,16 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		resultType="int">
 		select count(1) from sys_user where login_name=#{loginName}
 	</select>
+	
+	<select id="checkUnique" parameterType="User"
+		resultType="int">
+		select count(1) from sys_user
+		<where>
+			<if test="loginName != null and loginName != ''"> or login_name = #{loginName}</if>
+			<if test="phonenumber != null and phonenumber != ''"> or phonenumber = #{phonenumber}</if>
+			<if test="email != null and email != ''">or email = #{email}</if>
+		</where>
+	</select>
 
 	<select id="checkPhoneUnique" parameterType="String"
 		resultMap="UserResult">

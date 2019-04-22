@@ -3,10 +3,12 @@ package com.sinoiov.project.system.user.service;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.shiro.authz.AuthorizationException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.sinoiov.common.constant.UserConstants;
+import com.sinoiov.common.exception.user.UserNotExistsException;
 import com.sinoiov.common.support.Convert;
 import com.sinoiov.common.utils.StringUtils;
 import com.sinoiov.common.utils.security.ShiroUtils;
@@ -147,7 +149,8 @@ public class UserServiceImpl implements IUserService
      */
     @Override
     public int insertUser(User user)
-    {
+    {	
+    	checkUniq(user);
     	ldapDao.addUser(user);
         user.randomSalt();
         user.setPassword(passwordService.encryptPassword(user.getLoginName(), user.getPassword(), user.getSalt()));
@@ -168,6 +171,7 @@ public class UserServiceImpl implements IUserService
     @Override
     public int updateUser(User user)
     {
+    	checkUniq(user);
         Long userId = user.getUserId();
         user.setUpdateBy(ShiroUtils.getUserId());
         ldapDao.updateUser(user);
@@ -308,4 +312,12 @@ public class UserServiceImpl implements IUserService
 		return userMapper.selectUserByLoginToken(token);
 	}
 	
+	
+	 private boolean checkUniq(User user) {
+    	int count = userMapper.checkUnique(user);
+		if(count>0) {
+			throw new AuthorizationException("用户重复");
+		}
+		return true;
+	 }
 }

@@ -82,4 +82,11 @@ public interface RoleMapper
      * @return 角色信息
      */
     public Role checkRoleKeyUnique(String roleKey);
+    /**
+     * 校验角色权限是否唯一
+     * 
+     * @param roleKey 角色权限
+     * @return 角色信息
+     */
+    public int checkUnique(Role role);
 }

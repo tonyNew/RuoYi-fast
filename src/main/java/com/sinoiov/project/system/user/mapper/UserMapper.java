@@ -110,4 +110,6 @@ public interface UserMapper
 	public User selectUserByLoginToken(String token);
 
 	public int clearToken(User user);
+	
+	public int checkUnique(User user);
 }

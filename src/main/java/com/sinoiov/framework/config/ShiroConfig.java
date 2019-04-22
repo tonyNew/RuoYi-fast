@@ -5,6 +5,8 @@ import java.util.Map;
 
 import javax.servlet.Filter;
 
+import org.apache.shiro.authc.AuthenticationInfo;
+import org.apache.shiro.cache.Cache;
 import org.apache.shiro.cache.ehcache.EhCacheManager;
 import org.apache.shiro.codec.Base64;
 import org.apache.shiro.mgt.SecurityManager;
@@ -113,13 +115,13 @@ public class ShiroConfig
     /**
      * 自定义Realm
      */
-    @Bean
-    public UserRealm userRealm(RedisCacheManager cacheManager)
-    {
-        UserRealm userRealm = new UserRealm();
-        userRealm.setCacheManager(cacheManager);
-        return userRealm;
-    }
+//    @Bean
+//    public UserRealm userRealm(RedisCacheManager cacheManager)
+//    {
+//        UserRealm userRealm = new UserRealm();
+//        userRealm.setCacheManager(cacheManager);
+//        return userRealm;
+//    }
     /**
      * 自定义Realm
      */
@@ -128,6 +130,9 @@ public class ShiroConfig
     {
     	SinoiovTokenRealm userRealm = new SinoiovTokenRealm();
     	userRealm.setCacheManager(cacheManager);
+//    	userRealm.setAuthenticationCachingEnabled(true);
+//        Cache<Object, AuthenticationInfo> authenticationCache = cacheManager.getCache("sinoiov-setAuthenticationCache");
+//        userRealm.setAuthenticationCache(authenticationCache);
     	return userRealm;
     }
 
