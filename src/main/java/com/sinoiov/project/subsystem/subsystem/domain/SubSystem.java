@@ -1,5 +1,7 @@
 package com.sinoiov.project.subsystem.subsystem.domain;
 
+import javax.validation.constraints.NotEmpty;
+
 import com.sinoiov.common.domain.BaseEntity;
 
 /**
@@ -9,9 +11,12 @@ import com.sinoiov.common.domain.BaseEntity;
 */
 public class SubSystem extends BaseEntity {
 	private static final long serialVersionUID = 1L;
+	@NotEmpty(message="系统名称必填")
 	private String name;
+	@NotEmpty(message="系统地址必填")
 	private String url;
 	private String desc;
+//	@NotEmpty(message="系统图片地址必填")
 	private String img;
 	private Integer visible;
 

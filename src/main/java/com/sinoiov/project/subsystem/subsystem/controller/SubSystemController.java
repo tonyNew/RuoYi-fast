@@ -4,6 +4,7 @@ import java.util.Date;
 import java.util.List;
 
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -35,10 +36,11 @@ public class SubSystemController  extends AbstractController<ISubSystemService, 
     @Transactional
 	@ApiOperation("新增")
 	@RequestMapping(value="/add",method= {RequestMethod.POST})
-	public Result<Boolean> add(@RequestBody SubSystem domain) {
+	public Result<Boolean> add(@Validated @RequestBody SubSystem domain) {
     	Long userId = ShiroUtils.getUserId();
     	domain.setCreateBy(userId);
     	domain.setCreateTime(new Date());
+    	
 		boolean success = service.add(domain);
 		return ResultUtils.WrapSuccess(success);
 	}
@@ -48,7 +50,7 @@ public class SubSystemController  extends AbstractController<ISubSystemService, 
     @Transactional
 	@ApiOperation("更新")
 	@RequestMapping(value="/update",method= {RequestMethod.POST})
-	public Result<Boolean> update(@RequestBody SubSystem domain) {
+	public Result<Boolean> update(@Validated @RequestBody SubSystem domain) {
     	Long userId = ShiroUtils.getUserId();
     	domain.setUpdateBy(userId);
     	domain.setUpdateTime(new Date());
@@ -73,9 +75,4 @@ public class SubSystemController  extends AbstractController<ISubSystemService, 
 		domain.setVisible(0);
 		return ResultUtils.WrapSuccess(service.list(domain));
 	}
-    
-    
-    
-    
-    
 }

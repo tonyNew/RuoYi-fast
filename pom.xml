@@ -253,7 +253,7 @@
 		</dependency>
 		<dependency>
 			<groupId>com.sinoiov</groupId>
-			<artifactId>sino-sdk</artifactId>
+			<artifactId>sinoiov-sdk</artifactId>
 			<version>0.0.1-SNAPSHOT</version>
 		</dependency>
 
@@ -280,9 +280,9 @@
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-jar-plugin</artifactId>
-				<configuration>
+				<!-- <configuration>
 
-					<!--打包的时候忽略classes 路径下的配置文件 -->
+					打包的时候忽略classes 路径下的配置文件
 					<excludes>
 						<exclude>*.properties</exclude>
 						<exclude>*.ccf</exclude>
@@ -295,7 +295,7 @@
 						<exclude>static/**</exclude>
 						<exclude>templates/**</exclude>
 					</excludes>
-				</configuration>
+				</configuration> -->
 			</plugin>
 		</plugins>
 	</build>

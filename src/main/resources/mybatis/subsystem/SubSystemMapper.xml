@@ -54,5 +54,16 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
  		delete from as_subsystem where id = #{id}
 	</delete>
 	
+	<select id="checkUnique" parameterType="User"
+		resultType="int">
+		select count(1) from as_subsystem
+		<where>
+			<if test="id != null and id != ''">
+					and id != #{id}
+			</if>
+			and (`name` = #{name}  or `url` = #{url})
+		</where>
+	</select>
+	
 	
 </mapper> 
