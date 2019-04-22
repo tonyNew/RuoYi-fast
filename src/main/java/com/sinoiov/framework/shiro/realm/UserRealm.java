@@ -140,4 +140,5 @@ public class UserRealm extends AuthorizingRealm
     {
         this.clearCachedAuthorizationInfo(SecurityUtils.getSubject().getPrincipals());
     }
+    
 }

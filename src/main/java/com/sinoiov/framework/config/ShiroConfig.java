@@ -18,8 +18,11 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
+import com.google.common.collect.Lists;
 import com.sinoiov.common.utils.StringUtils;
+import com.sinoiov.framework.shiro.RedisCacheManager;
 import com.sinoiov.framework.shiro.realm.SinoiovTokenRealm;
+import com.sinoiov.framework.shiro.realm.UserRealm;
 import com.sinoiov.framework.shiro.web.filter.JWTAuthFilter;
 import com.sinoiov.framework.shiro.web.filter.LogoutFilter;
 import com.sinoiov.framework.shiro.web.filter.captcha.CaptchaValidateFilter;
@@ -81,37 +84,47 @@ public class ShiroConfig
      * 缓存管理器 使用Ehcache实现
      */
     @Bean
-    public EhCacheManager getEhCacheManager()
+    public RedisCacheManager getRedisCacheManager()
     {
-        net.sf.ehcache.CacheManager cacheManager = net.sf.ehcache.CacheManager.getCacheManager("ruoyi");
-        EhCacheManager em = new EhCacheManager();
-        if (StringUtils.isNull(cacheManager))
-        {
-            em.setCacheManagerConfigFile("classpath:ehcache/ehcache-shiro.xml");
-            return em;
-        }
-        else
-        {
-            em.setCacheManager(cacheManager);
-            return em;
-        }
+        return new RedisCacheManager();
     }
+    
+    
+    /**
+     * 缓存管理器 使用Ehcache实现
+     */
+//    @Bean
+//    public EhCacheManager getEhCacheManager()
+//    {
+//        net.sf.ehcache.CacheManager cacheManager = net.sf.ehcache.CacheManager.getCacheManager("ruoyi");
+//        EhCacheManager em = new EhCacheManager();
+//        if (StringUtils.isNull(cacheManager))
+//        {
+//            em.setCacheManagerConfigFile("classpath:ehcache/ehcache-shiro.xml");
+//            return em;
+//        }
+//        else
+//        {
+//            em.setCacheManager(cacheManager);
+//            return em;
+//        }
+//    }
 
     /**
      * 自定义Realm
      */
-//    @Bean
-//    public UserRealm userRealm(EhCacheManager cacheManager)
-//    {
-//        UserRealm userRealm = new UserRealm();
-//        userRealm.setCacheManager(cacheManager);
-//        return userRealm;
-//    }
+    @Bean
+    public UserRealm userRealm(RedisCacheManager cacheManager)
+    {
+        UserRealm userRealm = new UserRealm();
+        userRealm.setCacheManager(cacheManager);
+        return userRealm;
+    }
     /**
      * 自定义Realm
      */
     @Bean
-    public SinoiovTokenRealm sinoiovTokenRealm(EhCacheManager cacheManager)
+    public SinoiovTokenRealm sinoiovTokenRealm(RedisCacheManager cacheManager)
     {
     	SinoiovTokenRealm userRealm = new SinoiovTokenRealm();
     	userRealm.setCacheManager(cacheManager);
@@ -137,15 +150,15 @@ public class ShiroConfig
      * 安全管理器
      */
     @Bean
-    public SecurityManager securityManager(SinoiovTokenRealm userRealm)
+    public SecurityManager securityManager(SinoiovTokenRealm sinoiovTokenRealm,UserRealm userRealm)
     {
         DefaultWebSecurityManager securityManager = new DefaultWebSecurityManager();
         // 设置realm.
-        securityManager.setRealm(userRealm);
+        securityManager.setRealms(Lists.newArrayList(sinoiovTokenRealm,userRealm));
         // 记住我
         securityManager.setRememberMeManager(rememberMeManager());
         // 注入缓存管理器;
-        securityManager.setCacheManager(getEhCacheManager());
+        securityManager.setCacheManager(getRedisCacheManager());
         return securityManager;
     }
 
