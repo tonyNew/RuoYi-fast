@@ -1,7 +1,10 @@
 package com.sinoiov.project.system.role.domain;
 
+import javax.validation.constraints.NotNull;
+
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
+import org.springframework.data.annotation.Transient;
 
 import com.sinoiov.common.support.Convert;
 import com.sinoiov.framework.aspectj.lang.annotation.Excel;
@@ -22,14 +25,17 @@ public class Role extends BaseEntity
 
     /** 角色名称 */
     @Excel(name = "角色名称")
+    @NotNull(message="角色名称不能为空")
     private String roleName;
 
     /** 角色权限 */
     @Excel(name = "角色权限")
+    @NotNull(message="角色权限不能为空")
     private String roleKey;
 
     /** 角色排序 */
     @Excel(name = "角色排序")
+    @NotNull(message="角色排序不能为空")
     private String roleSort;
 
     /** 数据范围（1：所有数据权限；2：自定义数据权限） */
@@ -46,6 +52,7 @@ public class Role extends BaseEntity
     /** 用户是否存在此角色标识 默认不存在 */
     private boolean flag = false;
     
+    @Transient
     private String menuIdss;
 
     /** 菜单组 */

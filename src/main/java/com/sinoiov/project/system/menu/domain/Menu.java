@@ -8,6 +8,8 @@ import com.sinoiov.framework.web.domain.BaseEntity;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.validation.constraints.NotNull;
+
 /**
  * 菜单权限表 sys_menu
  * 
@@ -19,7 +21,7 @@ public class Menu extends BaseEntity
     
     /** 菜单ID */
     private Long menuId;
-    
+    @NotNull(message="菜单名称不能为空")
     /** 菜单名称 */
     private String menuName;
     

@@ -6,6 +6,7 @@ import java.util.Map;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -78,8 +79,8 @@ public class MenuController extends BaseController
     @RequiresPermissions("system:menu:add")
     @PostMapping("/add")
     @Transactional
-    public AjaxResult addSave(@RequestBody Menu menu)
-    {
+    public AjaxResult addSave(@Validated @RequestBody Menu menu)
+    {	
         return toAjax(menuService.insertMenu(menu));
     }
 
@@ -89,7 +90,7 @@ public class MenuController extends BaseController
     @Log(title = "菜单管理", businessType = BusinessType.UPDATE)
     @RequiresPermissions("system:menu:edit")
     @PostMapping("/update")
-    public AjaxResult editSave(@RequestBody Menu menu)
+    public AjaxResult editSave(@Validated @RequestBody Menu menu)
     {
         return toAjax(menuService.updateMenu(menu));
     }

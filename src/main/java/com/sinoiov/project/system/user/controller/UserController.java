@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.ModelMap;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -88,7 +89,7 @@ public class UserController extends BaseController
     @Log(title = "用户管理", businessType = BusinessType.INSERT)
     @PostMapping("/add")
     @Transactional(rollbackFor = Exception.class)
-    public AjaxResult addSave(@RequestBody User user)
+    public AjaxResult addSave(@Validated @RequestBody User user)
     {
         if (StringUtils.isNotNull(user.getUserId()) && User.isAdmin(user.getUserId()))
         {
@@ -118,7 +119,7 @@ public class UserController extends BaseController
     @PostMapping("/update")
     @Transactional(rollbackFor = Exception.class)
     @ResponseBody
-    public AjaxResult editSave(@RequestBody User user)
+    public AjaxResult editSave(@Validated @RequestBody User user)
     {
         if (StringUtils.isNotNull(user.getUserId()) && User.isAdmin(user.getUserId()))
         {

@@ -3,6 +3,10 @@ package com.sinoiov.project.system.user.domain;
 import java.util.Date;
 import java.util.List;
 
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
+
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
 import org.apache.shiro.crypto.SecureRandomNumberGenerator;
@@ -33,18 +37,22 @@ public class User extends BaseEntity
     private Long parentId;
 
     /** 登录名称 */
+    @NotNull
     @Excel(name = "登录名称")
     private String loginName;
 
     /** 用户名称 */
+    @NotNull(message="用户名称不能为空")
     @Excel(name = "用户名称")
     private String userName;
 
     /** 用户邮箱 */
     @Excel(name = "用户邮箱")
+    @Email(message = "邮箱格式错误")
     private String email;
 
     /** 手机号码 */
+    @Size(min = 11,max = 11,message = "手机不能为空，手机号码格式错误")
     @Excel(name = "手机号码")
     private String phonenumber;
 
