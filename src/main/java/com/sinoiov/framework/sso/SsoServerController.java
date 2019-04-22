@@ -47,7 +47,7 @@ public class SsoServerController {
 	
 	@ApiOperation("登陆")
 	@RequestMapping(value="/login",method= {RequestMethod.POST})
-    public Result<User> login(@RequestParam SinoiovToken token,HttpServletRequest request,HttpServletResponse response)
+    public Result<User> login(@RequestBody SinoiovToken token,HttpServletRequest request,HttpServletResponse response)
     {
 		token.setToken(WebUtils.toHttp(request).getHeader(Constants.SSO_AUTHORIZATION_TOKEN));
         Subject subject = SecurityUtils.getSubject();

@@ -154,7 +154,8 @@ public class ShiroConfig
     {
         DefaultWebSecurityManager securityManager = new DefaultWebSecurityManager();
         // 设置realm.
-        securityManager.setRealms(Lists.newArrayList(sinoiovTokenRealm,userRealm));
+        securityManager.setRealms(Lists.newArrayList(sinoiovTokenRealm));
+//        securityManager.setRealms(Lists.newArrayList(sinoiovTokenRealm,userRealm));
         // 记住我
         securityManager.setRememberMeManager(rememberMeManager());
         // 注入缓存管理器;

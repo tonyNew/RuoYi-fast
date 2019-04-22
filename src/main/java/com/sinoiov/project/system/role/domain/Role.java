@@ -3,6 +3,7 @@ package com.sinoiov.project.system.role.domain;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
 
+import com.sinoiov.common.support.Convert;
 import com.sinoiov.framework.aspectj.lang.annotation.Excel;
 import com.sinoiov.framework.web.domain.BaseEntity;
 
@@ -44,6 +45,8 @@ public class Role extends BaseEntity
 
     /** 用户是否存在此角色标识 默认不存在 */
     private boolean flag = false;
+    
+    private String menuIdss;
 
     /** 菜单组 */
     private Long[] menuIds;
@@ -133,6 +136,9 @@ public class Role extends BaseEntity
 
     public Long[] getMenuIds()
     {
+    	if(menuIds==null||menuIds.length==0) {
+    		return Convert.toLongArray(menuIdss);
+    	}
         return menuIds;
     }
 
@@ -150,8 +156,17 @@ public class Role extends BaseEntity
     {
         this.deptIds = deptIds;
     }
+    
+    
+    public String getMenuIdss() {
+		return menuIdss;
+	}
 
-    @Override
+	public void setMenuIdss(String menuIdss) {
+		this.menuIdss = menuIdss;
+	}
+
+	@Override
     public String toString() {
         return new ToStringBuilder(this,ToStringStyle.MULTI_LINE_STYLE)
             .append("roleId", getRoleId())
