@@ -34,6 +34,14 @@ public class DataScopeAspect
      * 自定数据权限
      */
     public static final String DATA_SCOPE_CUSTOM = "2";
+    /**
+     * 数据分组规则-按子系统分组
+     */
+    public static final int DATA_SCOPE_GROUP_RULE_SUBSYSTEM = 1;
+    /**
+     * 自定数据权限-按部门分组
+     */
+    public static final int DATA_SCOPE_GROUP_RULE_DEPT = 2;
 
     /**
      * 数据权限过滤关键字
@@ -67,7 +75,7 @@ public class DataScopeAspect
             // 如果是超级管理员，则不过滤数据
             if (!currentUser.isAdmin())
             {
-                dataScopeFilter(joinPoint, currentUser, controllerDataScope.tableAlias());
+                dataScopeFilter(joinPoint, currentUser, controllerDataScope.tableAlias(),controllerDataScope.groupRule());
             }
         }
     }
@@ -78,7 +86,7 @@ public class DataScopeAspect
      * @param da 部门表别名
      * @return 标准连接条件对象
      */
-    public static void dataScopeFilter(JoinPoint joinPoint, User user, String alias)
+    public static void dataScopeFilter(JoinPoint joinPoint, User user, String alias,int groupRule)
     {
         StringBuilder sqlString = new StringBuilder();
 
@@ -92,9 +100,15 @@ public class DataScopeAspect
             }
             else if (DATA_SCOPE_CUSTOM.equals(dataScope))
             {
-                sqlString.append(StringUtils.format(
-                        " OR {}.dept_id IN ( SELECT dept_id FROM sys_role_dept WHERE role_id = {} ) ", alias,
-                        role.getRoleId()));
+            	if(groupRule==DATA_SCOPE_GROUP_RULE_DEPT) {
+            		sqlString.append(StringUtils.format(
+            				" OR {}.dept_id IN ( SELECT dept_id FROM sys_role_dept WHERE role_id = {} ) ", alias,
+            				role.getRoleId()));
+            	}else if(groupRule==DATA_SCOPE_GROUP_RULE_SUBSYSTEM) {
+            		sqlString.append(StringUtils.format(
+            				" OR {}.id IN ( SELECT group_id FROM sys_role_data_group WHERE role_id = {} ) ", alias,
+            				role.getRoleId()));
+            	}
             }
         }
 

@@ -14,7 +14,19 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<select id="list" parameterType="SubSystem" resultMap="SubSystemResult">
 		select * from as_subsystem 
 	</select>
-	<insert id="add" parameterType="SubSystem">
+	
+	<select id="selectSubsystemByUserId" parameterType="Long" resultMap="SubSystemResult">
+		select distinct s.*
+			 from sys_menu m
+			 left join sys_role_menu rm on m.menu_id = rm.menu_id
+			 left join sys_user_role ur on rm.role_id = ur.role_id
+			 LEFT JOIN sys_role ro on ur.role_id = ro.role_id
+			 LEFT JOIN as_subsystem s on s.id=m.subsystem_id
+		where ur.user_id =#{userId} and m.menu_type in ('S') and m.visible = 0  AND ro.status = 0 and s.visible = 0 <!-- and s.id>1 -->
+		order by m.order_num
+	</select>
+	
+	<insert id="add" parameterType="SubSystem" useGeneratedKeys="true" keyProperty="id">
 		insert into as_subsystem(
  			<if test="name != null and name != ''">`name`,</if>
  			<if test="url != null and url != ''">url,</if>

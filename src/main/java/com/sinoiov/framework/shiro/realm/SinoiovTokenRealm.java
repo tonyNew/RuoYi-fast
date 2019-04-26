@@ -31,14 +31,16 @@ public class SinoiovTokenRealm extends UserRealm {
 	 */
 	@Override
 	protected AuthenticationInfo doGetAuthenticationInfo(AuthenticationToken token) throws AuthenticationException {
-		SinoiovToken upToken = (SinoiovToken) token;
-		User user = null;
-		if (StringUtils.isNotEmpty(upToken.getToken())) {
-			user = sSOTokenService.selectUserByToken(upToken.getToken());
-			if (user == null) {
-				throw new AuthenticationException("token" + upToken.getToken() + "校验不通过");
+		if(token instanceof SinoiovToken) {
+			SinoiovToken upToken = (SinoiovToken) token;
+			User user = null;
+			if (StringUtils.isNotEmpty(upToken.getToken())) {
+				user = sSOTokenService.selectUserByToken(upToken.getToken());
+				if (user == null) {
+					throw new AuthenticationException("token" + upToken.getToken() + "校验不通过");
+				}
+				return new SimpleAuthenticationInfo(user, user, getName());
 			}
-			return new SimpleAuthenticationInfo(user, user, getName());
 		}
 		return super.doGetAuthenticationInfo(token);
 	}

@@ -4,6 +4,11 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
+import org.apache.commons.collections.CollectionUtils;
+
+import com.google.common.collect.Lists;
+import com.sinoiov.common.utils.bean.BeanUtils;
+import com.sinoiov.project.common.enums.MenuTypeEnum;
 import com.sinoiov.project.system.menu.domain.Menu;
 
 /**
@@ -140,5 +145,29 @@ public class TreeUtils
     private static boolean hasChild(List<Menu> list, Menu t)
     {
         return getChildList(list, t).size() > 0 ? true : false;
+    }
+    
+    /**
+     * 递归过滤非按钮菜单和按钮菜单
+     * @param menuList
+     * @param buttonList
+     * @return
+     */
+    public static List<Menu> buildMenu(List<Menu> menuList,List<Menu> buttonList) {
+    	if(CollectionUtils.isEmpty(menuList)) {
+    		return Lists.newArrayList();
+    	}
+    	String buttonType = MenuTypeEnum.F.name();
+    	List<Menu> filtedMenuList = Lists.newArrayList();
+    	for (Menu menu : menuList) {
+			if(buttonType.equalsIgnoreCase(menu.getMenuType())) {
+				buttonList.add(menu);
+				continue;
+			}
+			filtedMenuList.add(menu);
+			List<Menu> buildMenu = buildMenu(menu.getChildren(),buttonList);
+			menu.setChildren(buildMenu);
+		}
+    	return filtedMenuList;
     }
 }

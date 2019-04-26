@@ -6,8 +6,10 @@ import java.util.Map;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.ui.ModelMap;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -16,6 +18,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.sinoiov.common.domain.Result;
 import com.sinoiov.common.utils.TreeUtils;
+import com.sinoiov.common.utils.security.ShiroUtils;
 import com.sinoiov.framework.aspectj.lang.annotation.Log;
 import com.sinoiov.framework.aspectj.lang.enums.BusinessType;
 import com.sinoiov.framework.web.controller.BaseController;
@@ -43,11 +46,12 @@ public class MenuController extends BaseController
     private IMenuService menuService;
 
 
-    @RequiresPermissions("system:menu:list")
+//    @RequiresPermissions("system:menu:list")
     @GetMapping("/list")
     public Result<List<Menu>>  list(Menu menu)
     {
-        List<Menu> menuList = menuService.selectMenuList(menu);
+    	List<Menu> menuList = menuService.selectMenuList(menu);
+//        List<Menu> menuList = menuService.selectMenusByMenuAndUserId(menu,ShiroUtils.getSysUser());
         List<Menu> childPerms = TreeUtils.getChildPerms(menuList, 0);
         return ResultUtils.WrapSuccess(childPerms);
     }
@@ -58,17 +62,17 @@ public class MenuController extends BaseController
     @Log(title = "菜单管理", businessType = BusinessType.DELETE)
     @RequiresPermissions("system:menu:remove")
     @PostMapping("/del")
-    public AjaxResult del(Long id)
+    public AjaxResult del(Long menuId)
     {
-        if (menuService.selectCountMenuByParentId(id) > 0)
+        if (menuService.selectCountMenuByParentId(menuId) > 0)
         {
             return error(1, "存在子菜单,不允许删除");
         }
-        if (menuService.selectCountRoleMenuByMenuId(id) > 0)
+        if (menuService.selectCountRoleMenuByMenuId(menuId) > 0)
         {
             return error(1, "菜单已分配,不允许删除");
         }
-        return toAjax(menuService.deleteMenuById(id));
+        return toAjax(menuService.deleteMenuById(menuId));
     }
 
 
@@ -93,6 +97,16 @@ public class MenuController extends BaseController
     public AjaxResult editSave(@Validated @RequestBody Menu menu)
     {
         return toAjax(menuService.updateMenu(menu));
+    }
+    
+    /**
+     * 修改菜单
+     */
+    @GetMapping("/detail")
+    public Result<Menu> edit( Long menuId)
+    {
+       Menu menu = menuService.selectMenuById(menuId);
+       return ResultUtils.WrapSuccess(menu);
     }
 
     /**

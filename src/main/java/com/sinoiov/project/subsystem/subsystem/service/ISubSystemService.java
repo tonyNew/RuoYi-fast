@@ -1,5 +1,7 @@
 package com.sinoiov.project.subsystem.subsystem.service;
 
+import java.util.List;
+
 import com.sinoiov.common.service.IService;
 import com.sinoiov.project.subsystem.subsystem.domain.SubSystem;
 
@@ -9,5 +11,7 @@ import com.sinoiov.project.subsystem.subsystem.domain.SubSystem;
  * 描    述：
 */
 public interface ISubSystemService extends IService<SubSystem> {
+
+	List<SubSystem> selectSubsystemByUserId(long userId);
 
 }

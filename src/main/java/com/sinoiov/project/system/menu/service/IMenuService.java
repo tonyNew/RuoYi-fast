@@ -19,9 +19,10 @@ public interface IMenuService
      * 根据用户ID查询菜单
      * 
      * @param user 用户信息
+     * @param subSystemId 
      * @return 菜单列表
      */
-    public List<Menu> selectMenusByUser(User user);
+    public List<Menu> selectMenusByUser(User user, Integer subSystemId);
 
     /**
      * 查询系统菜单列表
@@ -123,4 +124,6 @@ public interface IMenuService
      * @return 结果
      */
     public String checkMenuNameUnique(Menu menu);
+
+	List<Menu> selectMenusByMenuAndUserId(Menu menu, User user);
 }

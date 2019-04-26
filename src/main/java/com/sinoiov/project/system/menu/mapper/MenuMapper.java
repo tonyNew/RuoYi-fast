@@ -33,6 +33,13 @@ public interface MenuMapper
      * @return 菜单列表
      */
     public List<Menu> selectMenusByUserId(Long userId);
+    /**
+     * 根据用户ID和菜单信息查询用户的管理权限
+     * 
+     * @param userId 用户ID
+     * @return 菜单列表
+     */
+    public List<Menu> selectMenusByMenuAndUserId(Menu menu);
 
     /**
      * 根据用户ID查询权限

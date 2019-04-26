@@ -39,7 +39,7 @@ public class JWTAuthFilter extends AuthenticatingFilter {
 
     @Override
     protected boolean isAccessAllowed(ServletRequest request, ServletResponse response, Object mappedValue) {
-        if(this.isLoginRequest(request, response))
+        if(this.isLoginRequest(request, response)||getPathWithinApplication(request).equals("/sso/user/auth"))
             return true;
         boolean allowed = false;
         try {

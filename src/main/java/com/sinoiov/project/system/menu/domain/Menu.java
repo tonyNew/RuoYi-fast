@@ -5,6 +5,9 @@ import org.apache.commons.lang3.builder.ToStringStyle;
 
 import com.sinoiov.framework.web.domain.BaseEntity;
 
+import lombok.Getter;
+import lombok.Setter;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -18,6 +21,16 @@ import javax.validation.constraints.NotNull;
 public class Menu extends BaseEntity
 {
     private static final long serialVersionUID = 1L;
+    
+    @Setter
+    @Getter
+    /**子系统的ID*/
+    private long subsystemId=1;
+    
+    /**子系统的名称*/
+    @Setter
+    @Getter
+    private String subsystemName;
     
     /** 菜单ID */
     private Long menuId;
@@ -48,6 +61,7 @@ public class Menu extends BaseEntity
     
     /** 菜单图标 */
     private String icon;
+    
     
     /** 子菜单 */
     private List<Menu> children = new ArrayList<Menu>();
@@ -161,8 +175,8 @@ public class Menu extends BaseEntity
     {
         this.children = children;
     }
-
-    @Override
+    
+	@Override
     public String toString() {
         return new ToStringBuilder(this,ToStringStyle.MULTI_LINE_STYLE)
             .append("menuId", getMenuId())

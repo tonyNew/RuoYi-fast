@@ -20,4 +20,11 @@ public @interface DataScope
      * 表的别名
      */
     public String tableAlias() default "";
+    
+    /**
+     * 数据分组规则：1按子系统分组,2按部门分组
+     */
+    public int groupRule() default 1;
+    
+    
 }

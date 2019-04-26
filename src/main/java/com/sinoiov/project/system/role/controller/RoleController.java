@@ -2,8 +2,6 @@ package com.sinoiov.project.system.role.controller;
 
 import java.util.List;
 
-import javax.validation.Valid;
-
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
@@ -43,7 +41,7 @@ public class RoleController extends BaseController
     @Autowired
     private IRoleService roleService;
 
-    @RequiresPermissions("system:role:list")
+//    @RequiresPermissions("system:role:list")
     @GetMapping("/list")
     @ResponseBody
     public Result<TableDataInfo> list(Role role)
@@ -106,11 +104,11 @@ public class RoleController extends BaseController
     @RequiresPermissions("system:role:remove")
     @Log(title = "角色管理", businessType = BusinessType.DELETE)
     @PostMapping("/del")
-    public AjaxResult remove(String ids)
+    public AjaxResult remove(String roleId)
     {
         try
         {
-            return toAjax(roleService.deleteRoleByIds(ids));
+            return toAjax(roleService.deleteRoleByIds(roleId));
         }
         catch (Exception e)
         {
@@ -144,7 +142,7 @@ public class RoleController extends BaseController
     @GetMapping("/detail")
     public Result<Role> detail(Long roleId)
     {
-    	return ResultUtils.WrapSuccess( roleService.selectRoleById(roleId));
+    	return ResultUtils.WrapSuccess(roleService.selectRoleById(roleId));
     }
 
 }

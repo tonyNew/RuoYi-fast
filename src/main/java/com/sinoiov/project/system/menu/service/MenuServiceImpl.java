@@ -46,7 +46,7 @@ public class MenuServiceImpl implements IMenuService
      * @return 菜单列表
      */
     @Override
-    public List<Menu> selectMenusByUser(User user)
+    public List<Menu> selectMenusByUser(User user,Integer subSystemId)
     {
         List<Menu> menus = new LinkedList<Menu>();
         // 管理员显示所有菜单信息
@@ -58,7 +58,30 @@ public class MenuServiceImpl implements IMenuService
         {
             menus = menuMapper.selectMenusByUserId(user.getUserId());
         }
-        return TreeUtils.getChildPerms(menus, 0);
+        
+        return TreeUtils.getChildPerms(menus, subSystemId==null?1:subSystemId.intValue());
+    }
+    /**
+     * 根据用户查询菜单
+     * 
+     * @param user 用户信息
+     * @return 菜单列表
+     */
+    @Override
+    public List<Menu> selectMenusByMenuAndUserId(Menu menu,User user)
+    {
+    	List<Menu> menus = new LinkedList<Menu>();
+    	// 管理员显示所有菜单信息
+    	if (user.isAdmin())
+    	{
+    		menus = menuMapper.selectMenuList(menu);
+    	}
+    	else
+    	{
+    		menu.getParams().put("userId", user.getUserId());
+    		menus = menuMapper.selectMenusByMenuAndUserId(menu);
+    	}
+    	return TreeUtils.getChildPerms(menus, 0);
     }
 
     /**
