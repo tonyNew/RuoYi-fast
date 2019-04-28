@@ -5,11 +5,11 @@
 	<modelVersion>4.0.0</modelVersion>
 
 	<groupId>com.sinoiov</groupId>
-	<artifactId>sinoiov-admin</artifactId>
+	<artifactId>ucenter-admin</artifactId>
 	<version>1.0.0</version>
 	<packaging>jar</packaging>
 
-	<name>sinoiov-admin</name>
+	<name>ucenter</name>
 	<url>http://www.sinoiov.vip</url>
 	<description>中交兴路IT中心综合管控平台</description>
 
@@ -253,7 +253,7 @@
 		</dependency>
 		<dependency>
 			<groupId>com.sinoiov</groupId>
-			<artifactId>sinoiov-sdk</artifactId>
+			<artifactId>ucenter-sdk</artifactId>
 			<version>0.0.1-SNAPSHOT</version>
 		</dependency>
 

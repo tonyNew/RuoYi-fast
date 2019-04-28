@@ -32,6 +32,7 @@ import com.google.common.collect.Sets;
 import com.sinoiov.common.constant.Constants;
 import com.sinoiov.common.domain.Result;
 import com.sinoiov.common.sso.UserAuthRequest;
+import com.sinoiov.common.utils.ServletUtils;
 import com.sinoiov.common.utils.StringUtils;
 import com.sinoiov.common.utils.TreeUtils;
 import com.sinoiov.common.utils.security.ShiroUtils;
@@ -85,8 +86,9 @@ public class SsoServerController {
 	
 	@ApiOperation("登陆")
 	@RequestMapping(value="/login",method= {RequestMethod.POST})
-    public Result<User> login(@RequestBody SinoiovToken token,HttpServletRequest request,HttpServletResponse response)
+    public Result<User> login(@RequestBody SinoiovToken token,HttpServletRequest request,HttpServletResponse response,String service)
     {
+		ServletUtils.getUri(request);
 		token.setToken(WebUtils.toHttp(request).getHeader(Constants.SSO_AUTHORIZATION_TOKEN));
         Subject subject = SecurityUtils.getSubject();
         try
@@ -129,12 +131,12 @@ public class SsoServerController {
 	
     // 系统首页
     @GetMapping("/user/index")
-    public Result<JSONObject> index(Integer subSystemId)
+    public Result<JSONObject> index(Integer id)
     {
         // 取身份信息
         User user = ShiroUtils.getSysUser();
         // 根据用户id取出菜单
-        List<Menu> menus = menuService.selectMenusByUser(user,subSystemId);
+        List<Menu> menus = menuService.selectMenusByUser(user,id);
         List<Menu> buttonList = Lists.newArrayList();
         List<Menu> buildMenu = TreeUtils.buildMenu(menus, buttonList);
         JSONObject result = new JSONObject();

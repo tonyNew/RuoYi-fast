@@ -135,4 +135,19 @@ public class ServletUtils
 
         return false;
     }
+    
+    
+    
+    public static void getUri(HttpServletRequest request) {
+    	
+    	HttpServletRequest httpRequest=(HttpServletRequest)request;  
+    	String protocol = request.getProtocol();
+    	String strBackUrl =protocol+ "://" + request.getServerName() //服务器地址  
+    	                    + ":"   
+    	                    + request.getServerPort()           //端口号  
+    	                    + httpRequest.getContextPath()      //项目名称  
+    	                    + httpRequest.getServletPath()      //请求页面或其他地址  
+    	                    + "?" + (httpRequest.getQueryString()); //参数  
+    	String requestURI = request.getRequestURI();
+    }
 }
