@@ -33,7 +33,7 @@ public class ConfigController extends BaseController
     @Autowired
     private IConfigService configService;
 
-    @RequiresPermissions("system:config:view")
+    //@RequiresPermissions("system:config:view")
     @GetMapping()
     public String config()
     {
@@ -43,7 +43,7 @@ public class ConfigController extends BaseController
     /**
      * 查询参数配置列表
      */
-    @RequiresPermissions("system:config:list")
+    //@RequiresPermissions("system:config:list")
     @PostMapping("/list")
     @ResponseBody
     public TableDataInfo list(Config config)
@@ -54,7 +54,7 @@ public class ConfigController extends BaseController
     }
 
     @Log(title = "参数管理", businessType = BusinessType.EXPORT)
-    @RequiresPermissions("system:config:export")
+    //@RequiresPermissions("system:config:export")
     @PostMapping("/export")
     @ResponseBody
     public AjaxResult export(Config config)
@@ -76,7 +76,7 @@ public class ConfigController extends BaseController
     /**
      * 新增保存参数配置
      */
-    @RequiresPermissions("system:config:add")
+    //@RequiresPermissions("system:config:add")
     @Log(title = "参数管理", businessType = BusinessType.INSERT)
     @PostMapping("/add")
     @ResponseBody
@@ -98,7 +98,7 @@ public class ConfigController extends BaseController
     /**
      * 修改保存参数配置
      */
-    @RequiresPermissions("system:config:edit")
+    //@RequiresPermissions("system:config:edit")
     @Log(title = "参数管理", businessType = BusinessType.UPDATE)
     @PostMapping("/edit")
     @ResponseBody
@@ -110,7 +110,7 @@ public class ConfigController extends BaseController
     /**
      * 删除参数配置
      */
-    @RequiresPermissions("system:config:remove")
+    //@RequiresPermissions("system:config:remove")
     @Log(title = "参数管理", businessType = BusinessType.DELETE)
     @PostMapping("/remove")
     @ResponseBody

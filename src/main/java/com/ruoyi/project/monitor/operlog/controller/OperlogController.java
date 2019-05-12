@@ -33,14 +33,14 @@ public class OperlogController extends BaseController
     @Autowired
     private IOperLogService operLogService;
 
-    @RequiresPermissions("monitor:operlog:view")
+    //@RequiresPermissions("monitor:operlog:view")
     @GetMapping()
     public String operlog()
     {
         return prefix + "/operlog";
     }
 
-    @RequiresPermissions("monitor:operlog:list")
+    //@RequiresPermissions("monitor:operlog:list")
     @PostMapping("/list")
     @ResponseBody
     public TableDataInfo list(OperLog operLog)
@@ -51,7 +51,7 @@ public class OperlogController extends BaseController
     }
 
     @Log(title = "操作日志", businessType = BusinessType.EXPORT)
-    @RequiresPermissions("monitor:operlog:export")
+    //@RequiresPermissions("monitor:operlog:export")
     @PostMapping("/export")
     @ResponseBody
     public AjaxResult export(OperLog operLog)
@@ -61,7 +61,7 @@ public class OperlogController extends BaseController
         return util.exportExcel(list, "operLog");
     }
 
-    @RequiresPermissions("monitor:operlog:remove")
+    //@RequiresPermissions("monitor:operlog:remove")
     @PostMapping("/remove")
     @ResponseBody
     public AjaxResult remove(String ids)
@@ -69,7 +69,7 @@ public class OperlogController extends BaseController
         return toAjax(operLogService.deleteOperLogByIds(ids));
     }
 
-    @RequiresPermissions("monitor:operlog:detail")
+    //@RequiresPermissions("monitor:operlog:detail")
     @GetMapping("/detail/{operId}")
     public String detail(@PathVariable("operId") Long operId, ModelMap mmap)
     {
@@ -78,7 +78,7 @@ public class OperlogController extends BaseController
     }
     
     @Log(title = "操作日志", businessType = BusinessType.CLEAN)
-    @RequiresPermissions("monitor:operlog:remove")
+    //@RequiresPermissions("monitor:operlog:remove")
     @PostMapping("/clean")
     @ResponseBody
     public AjaxResult clean()

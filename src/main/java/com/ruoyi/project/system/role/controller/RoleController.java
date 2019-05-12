@@ -34,14 +34,14 @@ public class RoleController extends BaseController
     @Autowired
     private IRoleService roleService;
 
-    @RequiresPermissions("system:role:view")
+    //@RequiresPermissions("system:role:view")
     @GetMapping()
     public String role()
     {
         return prefix + "/role";
     }
 
-    @RequiresPermissions("system:role:list")
+    //@RequiresPermissions("system:role:list")
     @PostMapping("/list")
     @ResponseBody
     public TableDataInfo list(Role role)
@@ -52,7 +52,7 @@ public class RoleController extends BaseController
     }
 
     @Log(title = "角色管理", businessType = BusinessType.EXPORT)
-    @RequiresPermissions("system:role:export")
+    //@RequiresPermissions("system:role:export")
     @PostMapping("/export")
     @ResponseBody
     public AjaxResult export(Role role)
@@ -74,7 +74,7 @@ public class RoleController extends BaseController
     /**
      * 新增保存角色
      */
-    @RequiresPermissions("system:role:add")
+    //@RequiresPermissions("system:role:add")
     @Log(title = "角色管理", businessType = BusinessType.INSERT)
     @PostMapping("/add")
     @Transactional(rollbackFor = Exception.class)
@@ -98,7 +98,7 @@ public class RoleController extends BaseController
     /**
      * 修改保存角色
      */
-    @RequiresPermissions("system:role:edit")
+    //@RequiresPermissions("system:role:edit")
     @Log(title = "角色管理", businessType = BusinessType.UPDATE)
     @PostMapping("/edit")
     @Transactional(rollbackFor = Exception.class)
@@ -121,7 +121,7 @@ public class RoleController extends BaseController
     /**
      * 修改保存数据权限
      */
-    @RequiresPermissions("system:role:edit")
+    //@RequiresPermissions("system:role:edit")
     @Log(title = "角色管理", businessType = BusinessType.UPDATE)
     @PostMapping("/rule")
     @Transactional(rollbackFor = Exception.class)
@@ -131,7 +131,7 @@ public class RoleController extends BaseController
         return toAjax(roleService.updateRule(role));
     }
 
-    @RequiresPermissions("system:role:remove")
+    //@RequiresPermissions("system:role:remove")
     @Log(title = "角色管理", businessType = BusinessType.DELETE)
     @PostMapping("/remove")
     @ResponseBody

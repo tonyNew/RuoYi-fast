@@ -19,7 +19,7 @@ public class ServerController extends BaseController
 {
     private String prefix = "monitor/server";
 
-    @RequiresPermissions("monitor:server:view")
+    //@RequiresPermissions("monitor:server:view")
     @GetMapping()
     public String server(ModelMap mmap) throws Exception
     {

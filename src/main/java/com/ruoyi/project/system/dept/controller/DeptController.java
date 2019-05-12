@@ -34,14 +34,14 @@ public class DeptController extends BaseController
     @Autowired
     private IDeptService deptService;
 
-    @RequiresPermissions("system:dept:view")
+    //@RequiresPermissions("system:dept:view")
     @GetMapping()
     public String dept()
     {
         return prefix + "/dept";
     }
 
-    @RequiresPermissions("system:dept:list")
+    //@RequiresPermissions("system:dept:list")
     @GetMapping("/list")
     @ResponseBody
     public List<Dept> list(Dept dept)
@@ -64,7 +64,7 @@ public class DeptController extends BaseController
      * 新增保存部门
      */
     @Log(title = "部门管理", businessType = BusinessType.INSERT)
-    @RequiresPermissions("system:dept:add")
+    //@RequiresPermissions("system:dept:add")
     @PostMapping("/add")
     @ResponseBody
     public AjaxResult addSave(Dept dept)
@@ -91,7 +91,7 @@ public class DeptController extends BaseController
      * 保存
      */
     @Log(title = "部门管理", businessType = BusinessType.UPDATE)
-    @RequiresPermissions("system:dept:edit")
+    //@RequiresPermissions("system:dept:edit")
     @PostMapping("/edit")
     @ResponseBody
     public AjaxResult editSave(Dept dept)
@@ -103,7 +103,7 @@ public class DeptController extends BaseController
      * 删除
      */
     @Log(title = "部门管理", businessType = BusinessType.DELETE)
-    @RequiresPermissions("system:dept:remove")
+    //@RequiresPermissions("system:dept:remove")
     @PostMapping("/remove/{deptId}")
     @ResponseBody
     public AjaxResult remove(@PathVariable("deptId") Long deptId)

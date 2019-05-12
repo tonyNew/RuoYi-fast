@@ -17,7 +17,7 @@ public class DruidController extends BaseController
 {
     private String prefix = "/monitor/druid";
 
-    @RequiresPermissions("monitor:data:view")
+    //@RequiresPermissions("monitor:data:view")
     @GetMapping()
     public String index()
     {

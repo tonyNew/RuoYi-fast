@@ -33,7 +33,7 @@ public class DictTypeController extends BaseController
     @Autowired
     private IDictTypeService dictTypeService;
 
-    @RequiresPermissions("system:dict:view")
+    //@RequiresPermissions("system:dict:view")
     @GetMapping()
     public String dictType()
     {
@@ -41,7 +41,7 @@ public class DictTypeController extends BaseController
     }
 
     @PostMapping("/list")
-    @RequiresPermissions("system:dict:list")
+    //@RequiresPermissions("system:dict:list")
     @ResponseBody
     public TableDataInfo list(DictType dictType)
     {
@@ -51,7 +51,7 @@ public class DictTypeController extends BaseController
     }
 
     @Log(title = "字典类型", businessType = BusinessType.EXPORT)
-    @RequiresPermissions("system:dict:export")
+    //@RequiresPermissions("system:dict:export")
     @PostMapping("/export")
     @ResponseBody
     public AjaxResult export(DictType dictType)
@@ -75,7 +75,7 @@ public class DictTypeController extends BaseController
      * 新增保存字典类型
      */
     @Log(title = "字典类型", businessType = BusinessType.INSERT)
-    @RequiresPermissions("system:dict:add")
+    //@RequiresPermissions("system:dict:add")
     @PostMapping("/add")
     @ResponseBody
     public AjaxResult addSave(DictType dict)
@@ -97,7 +97,7 @@ public class DictTypeController extends BaseController
      * 修改保存字典类型
      */
     @Log(title = "字典类型", businessType = BusinessType.UPDATE)
-    @RequiresPermissions("system:dict:edit")
+    //@RequiresPermissions("system:dict:edit")
     @PostMapping("/edit")
     @ResponseBody
     public AjaxResult editSave(DictType dict)
@@ -106,7 +106,7 @@ public class DictTypeController extends BaseController
     }
 
     @Log(title = "字典类型", businessType = BusinessType.DELETE)
-    @RequiresPermissions("system:dict:remove")
+    //@RequiresPermissions("system:dict:remove")
     @PostMapping("/remove")
     @ResponseBody
     public AjaxResult remove(String ids)
@@ -124,7 +124,7 @@ public class DictTypeController extends BaseController
     /**
      * 查询字典详细
      */
-    @RequiresPermissions("system:dict:list")
+    //@RequiresPermissions("system:dict:list")
     @GetMapping("/detail/{dictId}")
     public String detail(@PathVariable("dictId") Long dictId, ModelMap mmap)
     {

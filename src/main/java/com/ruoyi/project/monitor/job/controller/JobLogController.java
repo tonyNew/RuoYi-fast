@@ -33,14 +33,14 @@ public class JobLogController extends BaseController
     @Autowired
     private IJobLogService jobLogService;
 
-    @RequiresPermissions("monitor:job:view")
+    //@RequiresPermissions("monitor:job:view")
     @GetMapping()
     public String jobLog()
     {
         return prefix + "/jobLog";
     }
 
-    @RequiresPermissions("monitor:job:list")
+    //@RequiresPermissions("monitor:job:list")
     @PostMapping("/list")
     @ResponseBody
     public TableDataInfo list(JobLog jobLog)
@@ -51,7 +51,7 @@ public class JobLogController extends BaseController
     }
 
     @Log(title = "调度日志", businessType = BusinessType.EXPORT)
-    @RequiresPermissions("monitor:job:export")
+    //@RequiresPermissions("monitor:job:export")
     @PostMapping("/export")
     @ResponseBody
     public AjaxResult export(JobLog jobLog)
@@ -62,7 +62,7 @@ public class JobLogController extends BaseController
     }
 
     @Log(title = "调度日志", businessType = BusinessType.DELETE)
-    @RequiresPermissions("monitor:job:remove")
+    //@RequiresPermissions("monitor:job:remove")
     @PostMapping("/remove")
     @ResponseBody
     public AjaxResult remove(String ids)
@@ -70,7 +70,7 @@ public class JobLogController extends BaseController
         return toAjax(jobLogService.deleteJobLogByIds(ids));
     }
     
-    @RequiresPermissions("monitor:job:detail")
+    //@RequiresPermissions("monitor:job:detail")
     @GetMapping("/detail/{jobLogId}")
     public String detail(@PathVariable("jobLogId") Long jobLogId, ModelMap mmap)
     {
@@ -80,7 +80,7 @@ public class JobLogController extends BaseController
     }
     
     @Log(title = "调度日志", businessType = BusinessType.CLEAN)
-    @RequiresPermissions("monitor:job:remove")
+    //@RequiresPermissions("monitor:job:remove")
     @PostMapping("/clean")
     @ResponseBody
     public AjaxResult clean()

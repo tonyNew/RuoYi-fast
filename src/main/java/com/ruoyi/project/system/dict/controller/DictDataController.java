@@ -33,7 +33,7 @@ public class DictDataController extends BaseController
     @Autowired
     private IDictDataService dictDataService;
 
-    @RequiresPermissions("system:dict:view")
+    //@RequiresPermissions("system:dict:view")
     @GetMapping()
     public String dictData()
     {
@@ -41,7 +41,7 @@ public class DictDataController extends BaseController
     }
 
     @PostMapping("/list")
-    @RequiresPermissions("system:dict:list")
+    //@RequiresPermissions("system:dict:list")
     @ResponseBody
     public TableDataInfo list(DictData dictData)
     {
@@ -51,7 +51,7 @@ public class DictDataController extends BaseController
     }
 
     @Log(title = "字典数据", businessType = BusinessType.EXPORT)
-    @RequiresPermissions("system:dict:export")
+    //@RequiresPermissions("system:dict:export")
     @PostMapping("/export")
     @ResponseBody
     public AjaxResult export(DictData dictData)
@@ -75,7 +75,7 @@ public class DictDataController extends BaseController
      * 新增保存字典类型
      */
     @Log(title = "字典数据", businessType = BusinessType.INSERT)
-    @RequiresPermissions("system:dict:add")
+    //@RequiresPermissions("system:dict:add")
     @PostMapping("/add")
     @ResponseBody
     public AjaxResult addSave(DictData dict)
@@ -97,7 +97,7 @@ public class DictDataController extends BaseController
      * 修改保存字典类型
      */
     @Log(title = "字典数据", businessType = BusinessType.UPDATE)
-    @RequiresPermissions("system:dict:edit")
+    //@RequiresPermissions("system:dict:edit")
     @PostMapping("/edit")
     @ResponseBody
     public AjaxResult editSave(DictData dict)
@@ -106,7 +106,7 @@ public class DictDataController extends BaseController
     }
 
     @Log(title = "字典数据", businessType = BusinessType.DELETE)
-    @RequiresPermissions("system:dict:remove")
+    //@RequiresPermissions("system:dict:remove")
     @PostMapping("/remove")
     @ResponseBody
     public AjaxResult remove(String ids)

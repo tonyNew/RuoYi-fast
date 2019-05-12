@@ -37,14 +37,14 @@ public class UserOnlineController extends BaseController
     @Autowired
     private OnlineSessionDAO onlineSessionDAO;
 
-    @RequiresPermissions("monitor:online:view")
+    //@RequiresPermissions("monitor:online:view")
     @GetMapping()
     public String online()
     {
         return prefix + "/online";
     }
 
-    @RequiresPermissions("monitor:online:list")
+    //@RequiresPermissions("monitor:online:list")
     @PostMapping("/list")
     @ResponseBody
     public TableDataInfo list(UserOnline userOnline)
@@ -54,7 +54,7 @@ public class UserOnlineController extends BaseController
         return getDataTable(list);
     }
 
-    @RequiresPermissions("monitor:online:batchForceLogout")
+    //@RequiresPermissions("monitor:online:batchForceLogout")
     @Log(title = "在线用户", businessType = BusinessType.FORCE)
     @PostMapping("/batchForceLogout")
     @ResponseBody
@@ -83,7 +83,7 @@ public class UserOnlineController extends BaseController
         return success();
     }
 
-    @RequiresPermissions("monitor:online:forceLogout")
+    //@RequiresPermissions("monitor:online:forceLogout")
     @Log(title = "在线用户", businessType = BusinessType.FORCE)
     @PostMapping("/forceLogout")
     @ResponseBody

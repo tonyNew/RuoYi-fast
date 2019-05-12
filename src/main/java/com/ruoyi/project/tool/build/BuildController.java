@@ -17,7 +17,7 @@ public class BuildController extends BaseController
 {
     private String prefix = "tool/build";
 
-    @RequiresPermissions("tool:build:view")
+    //@RequiresPermissions("tool:build:view")
     @GetMapping()
     public String build()
     {

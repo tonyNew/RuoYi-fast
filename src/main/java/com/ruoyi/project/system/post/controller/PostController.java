@@ -33,14 +33,14 @@ public class PostController extends BaseController
     @Autowired
     private IPostService postService;
 
-    @RequiresPermissions("system:post:view")
+    //@RequiresPermissions("system:post:view")
     @GetMapping()
     public String operlog()
     {
         return prefix + "/post";
     }
 
-    @RequiresPermissions("system:post:list")
+    //@RequiresPermissions("system:post:list")
     @PostMapping("/list")
     @ResponseBody
     public TableDataInfo list(Post post)
@@ -51,7 +51,7 @@ public class PostController extends BaseController
     }
 
     @Log(title = "岗位管理", businessType = BusinessType.EXPORT)
-    @RequiresPermissions("system:post:export")
+    //@RequiresPermissions("system:post:export")
     @PostMapping("/export")
     @ResponseBody
     public AjaxResult export(Post post)
@@ -61,7 +61,7 @@ public class PostController extends BaseController
         return util.exportExcel(list, "post");
     }
 
-    @RequiresPermissions("system:post:remove")
+    //@RequiresPermissions("system:post:remove")
     @Log(title = "岗位管理", businessType = BusinessType.DELETE)
     @PostMapping("/remove")
     @ResponseBody
@@ -89,7 +89,7 @@ public class PostController extends BaseController
     /**
      * 新增保存岗位
      */
-    @RequiresPermissions("system:post:add")
+    //@RequiresPermissions("system:post:add")
     @Log(title = "岗位管理", businessType = BusinessType.INSERT)
     @PostMapping("/add")
     @ResponseBody
@@ -111,7 +111,7 @@ public class PostController extends BaseController
     /**
      * 修改保存岗位
      */
-    @RequiresPermissions("system:post:edit")
+    //@RequiresPermissions("system:post:edit")
     @Log(title = "岗位管理", businessType = BusinessType.UPDATE)
     @PostMapping("/edit")
     @ResponseBody

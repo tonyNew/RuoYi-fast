@@ -33,14 +33,14 @@ public class JobController extends BaseController
     @Autowired
     private IJobService jobService;
 
-    @RequiresPermissions("monitor:job:view")
+    //@RequiresPermissions("monitor:job:view")
     @GetMapping()
     public String job()
     {
         return prefix + "/job";
     }
 
-    @RequiresPermissions("monitor:job:list")
+    //@RequiresPermissions("monitor:job:list")
     @PostMapping("/list")
     @ResponseBody
     public TableDataInfo list(Job job)
@@ -51,7 +51,7 @@ public class JobController extends BaseController
     }
 
     @Log(title = "定时任务", businessType = BusinessType.EXPORT)
-    @RequiresPermissions("monitor:job:export")
+    //@RequiresPermissions("monitor:job:export")
     @PostMapping("/export")
     @ResponseBody
     public AjaxResult export(Job job)
@@ -62,7 +62,7 @@ public class JobController extends BaseController
     }
 
     @Log(title = "定时任务", businessType = BusinessType.DELETE)
-    @RequiresPermissions("monitor:job:remove")
+    //@RequiresPermissions("monitor:job:remove")
     @PostMapping("/remove")
     @ResponseBody
     public AjaxResult remove(String ids)
@@ -79,7 +79,7 @@ public class JobController extends BaseController
         }
     }
     
-    @RequiresPermissions("monitor:job:detail")
+    //@RequiresPermissions("monitor:job:detail")
     @GetMapping("/detail/{jobId}")
     public String detail(@PathVariable("jobId") Long jobId, ModelMap mmap)
     {
@@ -92,7 +92,7 @@ public class JobController extends BaseController
      * 任务调度状态修改
      */
     @Log(title = "定时任务", businessType = BusinessType.UPDATE)
-    @RequiresPermissions("monitor:job:changeStatus")
+    //@RequiresPermissions("monitor:job:changeStatus")
     @PostMapping("/changeStatus")
     @ResponseBody
     public AjaxResult changeStatus(Job job)
@@ -104,7 +104,7 @@ public class JobController extends BaseController
      * 任务调度立即执行一次
      */
     @Log(title = "定时任务", businessType = BusinessType.UPDATE)
-    @RequiresPermissions("monitor:job:changeStatus")
+    //@RequiresPermissions("monitor:job:changeStatus")
     @PostMapping("/run")
     @ResponseBody
     public AjaxResult run(Job job)
@@ -125,7 +125,7 @@ public class JobController extends BaseController
      * 新增保存调度
      */
     @Log(title = "定时任务", businessType = BusinessType.INSERT)
-    @RequiresPermissions("monitor:job:add")
+    //@RequiresPermissions("monitor:job:add")
     @PostMapping("/add")
     @ResponseBody
     public AjaxResult addSave(Job job)
@@ -147,7 +147,7 @@ public class JobController extends BaseController
      * 修改保存调度
      */
     @Log(title = "定时任务", businessType = BusinessType.UPDATE)
-    @RequiresPermissions("monitor:job:edit")
+    //@RequiresPermissions("monitor:job:edit")
     @PostMapping("/edit")
     @ResponseBody
     public AjaxResult editSave(Job job)

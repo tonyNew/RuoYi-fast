@@ -32,7 +32,7 @@ public class NoticeController extends BaseController
     @Autowired
     private INoticeService noticeService;
 
-    @RequiresPermissions("system:notice:view")
+    //@RequiresPermissions("system:notice:view")
     @GetMapping()
     public String notice()
     {
@@ -42,7 +42,7 @@ public class NoticeController extends BaseController
     /**
      * 查询公告列表
      */
-    @RequiresPermissions("system:notice:list")
+    //@RequiresPermissions("system:notice:list")
     @PostMapping("/list")
     @ResponseBody
     public TableDataInfo list(Notice notice)
@@ -64,7 +64,7 @@ public class NoticeController extends BaseController
     /**
      * 新增保存公告
      */
-    @RequiresPermissions("system:notice:add")
+    //@RequiresPermissions("system:notice:add")
     @Log(title = "通知公告", businessType = BusinessType.INSERT)
     @PostMapping("/add")
     @ResponseBody
@@ -86,7 +86,7 @@ public class NoticeController extends BaseController
     /**
      * 修改保存公告
      */
-    @RequiresPermissions("system:notice:edit")
+    //@RequiresPermissions("system:notice:edit")
     @Log(title = "通知公告", businessType = BusinessType.UPDATE)
     @PostMapping("/edit")
     @ResponseBody
@@ -98,7 +98,7 @@ public class NoticeController extends BaseController
     /**
      * 删除公告
      */
-    @RequiresPermissions("system:notice:remove")
+    //@RequiresPermissions("system:notice:remove")
     @Log(title = "通知公告", businessType = BusinessType.DELETE)
     @PostMapping("/remove")
     @ResponseBody

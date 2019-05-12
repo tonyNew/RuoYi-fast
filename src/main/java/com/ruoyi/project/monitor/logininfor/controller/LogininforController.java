@@ -31,14 +31,14 @@ public class LogininforController extends BaseController
     @Autowired
     private ILogininforService logininforService;
 
-    @RequiresPermissions("monitor:logininfor:view")
+    //@RequiresPermissions("monitor:logininfor:view")
     @GetMapping()
     public String logininfor()
     {
         return prefix + "/logininfor";
     }
 
-    @RequiresPermissions("monitor:logininfor:list")
+    //@RequiresPermissions("monitor:logininfor:list")
     @PostMapping("/list")
     @ResponseBody
     public TableDataInfo list(Logininfor logininfor)
@@ -49,7 +49,7 @@ public class LogininforController extends BaseController
     }
 
     @Log(title = "登陆日志", businessType = BusinessType.EXPORT)
-    @RequiresPermissions("monitor:logininfor:export")
+    //@RequiresPermissions("monitor:logininfor:export")
     @PostMapping("/export")
     @ResponseBody
     public AjaxResult export(Logininfor logininfor)
@@ -59,7 +59,7 @@ public class LogininforController extends BaseController
         return util.exportExcel(list, "logininfor");
     }
 
-    @RequiresPermissions("monitor:logininfor:remove")
+    //@RequiresPermissions("monitor:logininfor:remove")
     @Log(title = "登陆日志", businessType = BusinessType.DELETE)
     @PostMapping("/remove")
     @ResponseBody
@@ -68,7 +68,7 @@ public class LogininforController extends BaseController
         return toAjax(logininforService.deleteLogininforByIds(ids));
     }
     
-    @RequiresPermissions("monitor:logininfor:remove")
+    //@RequiresPermissions("monitor:logininfor:remove")
     @Log(title = "登陆日志", businessType = BusinessType.CLEAN)
     @PostMapping("/clean")
     @ResponseBody
