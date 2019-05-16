@@ -264,6 +264,20 @@
 	</dependencies>
 
 	<build>
+		<resources>
+     
+        <!--将resources下的配置文件拷贝到target/config目录下-->
+        <resource>
+            <directory>src/main/resources</directory>
+            <targetPath>${project.build.directory}/config</targetPath>
+        </resource>
+       <resource>
+            <directory>src/main/resources</directory>
+            <includes>
+               <include>**/*.*</include>
+            </includes>
+          </resource>
+    </resources>
 		<plugins>
 			  <!-- 将所依赖的第三方jar包打入target下的lib目录 -->
 	        <plugin>
