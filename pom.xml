@@ -271,7 +271,7 @@
             <configuration>
             		<configuration>
 						<fork>true</fork>
-						<mainClass>com.sinoiov.Application</mainClass>
+						<mainClass>com.ruoyi.RuoYiApplication</mainClass>
 						<layout>ZIP</layout>
 					</configuration>
                 
