@@ -38,15 +38,15 @@ public class ShiroConfig
     public static final String PREMISSION_STRING = "perms[\"{0}\"]";
 
     // Session超时时间，单位为毫秒（默认30分钟）
-    @Value("${shiro.session.expireTime}")
+    @Value("${shiro.session.expireTime:30}")
     private int expireTime;
 
     // 相隔多久检查一次session的有效性，单位毫秒，默认就是10分钟
-    @Value("${shiro.session.validationInterval}")
+    @Value("${shiro.session.validationInterval:10}")
     private int validationInterval;
 
     // 验证码开关
-    @Value("${shiro.user.captchaEnabled}")
+    @Value("${shiro.user.captchaEnabled:true}")
     private boolean captchaEnabled;
 
     // 验证码类型

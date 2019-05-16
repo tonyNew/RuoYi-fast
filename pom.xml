@@ -265,11 +265,42 @@
 
 	<build>
 		<plugins>
+			  <!-- 将所依赖的第三方jar包打入target下的lib目录 -->
+	        <plugin>
+	            <groupId>org.apache.maven.plugins</groupId>
+	            <artifactId>maven-dependency-plugin</artifactId>
+	            <version>2.5</version>
+	            <executions>
+	                <execution>
+	                    <id>copy-dependencies</id>
+	                    <phase>package</phase>
+	                    <goals>
+	                        <goal>copy-dependencies</goal>
+	                    </goals>
+	                    <configuration>
+	                        <outputDirectory>${project.build.directory}/lib</outputDirectory>
+	                    </configuration>
+	                </execution>
+	            </executions>
+	        </plugin>
+	        
+	        
 			<plugin>
             <groupId>org.apache.maven.plugins</groupId>
             <artifactId>maven-jar-plugin</artifactId>
             <configuration>
                    <!--打包的时候忽略classes 路径下的配置文件 -->
+                   <archive>
+                   	 <manifest>
+                        <addClasspath>true</addClasspath>
+                        <classpathPrefix>lib/</classpathPrefix>
+                        <mainClass>com.ruoyi.RuoYiApplication</mainClass>
+                    </manifest>
+                    <!-- 给清单文件添加键值对(配置文件外置) -->
+                       <manifestEntries>
+                           <Class-Path>config/</Class-Path>
+                       </manifestEntries>
+                   </archive>
                    <excludes>
                        <exclude>*.properties</exclude>
                        <exclude>*.ccf</exclude>
@@ -284,28 +315,6 @@
                    </excludes>
             </configuration>
         </plugin>
-			
-			<plugin>
-				<groupId>org.springframework.boot</groupId>
-				<artifactId>spring-boot-maven-plugin</artifactId>
-				<configuration>
-					<fork>true</fork>
-					<mainClass>com.ruoyi.RuoYiApplication</mainClass>
-					<layout>ZIP</layout>
-				</configuration>
-				<executions>
-					<execution>
-						<goals>
-							<goal>repackage</goal>
-						</goals>
-						<!-- 分离出代码包
-						<configuration>
-							<classifier>exec</classifier>
-						</configuration>
-						 -->
-					</execution>
-				</executions>
-			</plugin>
 			
 		</plugins>
 	</build>
