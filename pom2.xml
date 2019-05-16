@@ -269,11 +269,6 @@
             <groupId>org.apache.maven.plugins</groupId>
             <artifactId>maven-jar-plugin</artifactId>
             <configuration>
-            		<configuration>
-						<fork>true</fork>
-						<mainClass>com.sinoiov.Application</mainClass>
-						<layout>ZIP</layout>
-					</configuration>
                 
                    <!--打包的时候忽略classes 路径下的配置文件 -->
                    <excludes>
