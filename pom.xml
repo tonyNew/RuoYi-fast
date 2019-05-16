@@ -269,12 +269,6 @@
             <groupId>org.apache.maven.plugins</groupId>
             <artifactId>maven-jar-plugin</artifactId>
             <configuration>
-            		<configuration>
-						<fork>true</fork>
-						<mainClass>com.ruoyi.RuoYiApplication</mainClass>
-						<layout>ZIP</layout>
-					</configuration>
-                
                    <!--打包的时候忽略classes 路径下的配置文件 -->
                    <excludes>
                        <exclude>*.properties</exclude>
@@ -290,6 +284,29 @@
                    </excludes>
             </configuration>
         </plugin>
+			
+			<plugin>
+				<groupId>org.springframework.boot</groupId>
+				<artifactId>spring-boot-maven-plugin</artifactId>
+				<configuration>
+					<fork>true</fork>
+					<mainClass>com.ruoyi.RuoYiApplication</mainClass>
+					<layout>ZIP</layout>
+				</configuration>
+				<executions>
+					<execution>
+						<goals>
+							<goal>repackage</goal>
+						</goals>
+						<!-- 分离出代码包
+						<configuration>
+							<classifier>exec</classifier>
+						</configuration>
+						 -->
+					</execution>
+				</executions>
+			</plugin>
+			
 		</plugins>
 	</build>
 
