@@ -2,6 +2,8 @@ package com.ruoyi.framework.web.domain;
 
 import java.util.HashMap;
 
+import org.springframework.ui.ModelMap;
+
 /**
  * 操作消息提醒
  * 
@@ -77,6 +79,8 @@ public class AjaxResult extends HashMap<String, Object>
     {
         return AjaxResult.success("操作成功");
     }
+    
+   
 
     /**
      * 返回成功消息
@@ -105,4 +109,10 @@ public class AjaxResult extends HashMap<String, Object>
         json.put("data", data);
         return json;
     }
+
+	public static AjaxResult returnResult(boolean success) {
+		 AjaxResult json = new AjaxResult();
+        json.put("success", success);
+    	return json;
+	}
 }
