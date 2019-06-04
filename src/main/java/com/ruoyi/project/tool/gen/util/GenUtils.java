@@ -90,7 +90,7 @@ public class GenUtils
         templates.add("templates/vm/html/list.html.vm");
         templates.add("templates/vm/html/add.html.vm");
         templates.add("templates/vm/html/edit.html.vm");
-//        templates.add("templates/vm/html/detail.html.vm");
+        templates.add("templates/vm/html/detail.html.vm");
         templates.add("templates/vm/sql/sql.vm");
         return templates;
     }
@@ -171,10 +171,10 @@ public class GenUtils
         {
             return htmlPath + "/" + "edit.html";
         }
-//        if (template.contains("detail.html.vm"))
-//        {
-//            return htmlPath + "/" + "detail.html";
-//        }
+        if (template.contains("detail.html.vm"))
+        {
+            return htmlPath + "/" + "detail.html";
+        }
         if (template.contains("sql.vm"))
         {
             return classname + "Menu.sql";

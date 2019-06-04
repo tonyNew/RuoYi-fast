@@ -1,0 +1,79 @@
+<!DOCTYPE HTML>
+<html lang="zh" xmlns:th="http://www.thymeleaf.org" xmlns:shiro="http://www.pollix.at/thymeleaf/shiro">
+<meta charset="utf-8">
+<head th:include="include :: header"></head>
+<body class="gray-bg">
+    
+     <div class="container-div">
+		<div class="row">
+			<div class="col-sm-12 search-collapse">
+				<div th:include="include :: commonInfo"></div>
+			</div>
+
+			<div class="col-sm-12 select-table table-striped">
+				<table id="bootstrap-table" data-mobile-responsive="true"></table>
+			</div>
+		</div>
+	</div>
+    <div th:include="include :: footer"></div>
+    <script th:inline="javascript">
+        var editFlag = [[${@permission.hasPermi('${moduleName}:${classname}:edit')}]];
+        var removeFlag = [[${@permission.hasPermi('${moduleName}:${classname}:remove')}]];
+        var prefix = ctx + "${moduleName}/${classname}";
+#foreach($column in $columns)
+#if(${column.configInfo} && ${column.configInfo.type} == 'dict')
+        var datas = [[${@dict.getType('${column.configInfo.value}')}]];
+#end
+#end
+
+        $(function() {
+            var options = {
+                url: prefix + "/detail",
+                modalName: "${tableComment}",
+				search: false,
+		        showSearch:false,
+				showRefresh:false,
+				showColumns:false,
+           	 	showExport:false,
+           	 	showToggle:true,
+           	 	queryParams: queryParams,
+                columns: [{
+		            checkbox: true
+		        },
+#foreach($column in $columns)
+#if($column.columnName == $primaryKey.columnName)
+				{
+					field : '${column.attrname}', 
+					title : '${column.columnComment}',
+					visible: false
+				},
+#elseif($column.columnName != $primaryKey.columnName)
+#if(${column.configInfo} && ${column.configInfo.type} == 'dict')
+				{
+					field : '${column.attrname}', 
+					title : '${column.columnComment}',
+					sortable: true,
+					formatter: function(value, row, index) {
+		            	return $.table.selectDictLabel(datas, value);
+		            }
+				},
+#else
+				{
+					field : '${column.attrname}', 
+					title : '${column.columnComment}',
+					sortable: true
+				},
+#end
+#end				
+#end
+		        {
+					field : 'insertTime', 
+					title : '创建时间',
+					sortable: true
+				}]
+            };
+            $.table.init(options);
+        });
+    </script>
+</body>
+</html>
